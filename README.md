@@ -1,2 +1,14 @@
-# FCGEC
-The Corpus &amp; Code for EMNLP 2022 paper "FCGEC: Fine-Grained Corpus for Chinese Grammatical Error Correction" | FCGEC中文纠错语料
+<p align="center">
+    <br>
+    <img src="./figure/logo.png" width="500"/>
+    <br>
+</p>
+<p align="center">
+    <a href="https://github.com/ymcui/Chinese-BERT-wwm/blob/master/LICENSE">
+        <img alt="GitHub" src="https://img.shields.io/github/license/ymcui/Chinese-BERT-wwm.svg?color=blue&style=flat-square">
+    </a>
+</p>
+
+---
+
+
