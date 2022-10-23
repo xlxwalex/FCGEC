@@ -1,7 +1,5 @@
 # FCGEC Correction Scorer
 
----
-
 ## Metric for Classification Task
 We regard the error detection task and error type identification task as classification tasks. Therefore, we adopt four common metrics, i.e., `Accuracy`, `Precision`, `Recall` and `Macro F1 score` to evaluate the model performance.
 
