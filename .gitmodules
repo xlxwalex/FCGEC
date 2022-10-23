@@ -1,0 +1,3 @@
+[submodule "scorer/ChERRANT"]
+	path = scorer/ChERRANT
+	url = https://github.com/HillZhang1999/MuCGEC.git
