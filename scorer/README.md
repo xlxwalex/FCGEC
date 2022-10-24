@@ -21,4 +21,4 @@ We employ two different metrics :
 ## Online Evaluation
 We have established an evaluation page in codalab for everyone to evaluate their systems on test set. The link url is: [https://codalab.lisn.upsaclay.fr/competitions/8020](https://codalab.lisn.upsaclay.fr/competitions/8020). If you have an question when using evaluation system, feel free to contact [pengjw@zju.edu.cn](pengjw@zju.edu.cn).
 
-我们在Codalab上建立了一个公共的评测页面，任何人都可以通过该页面评估他们模型在测试集上的性能。评测页面的链接是： [https://codalab.lisn.upsaclay.fr/competitions/8020](https://codalab.lisn.upsaclay.fr/competitions/8020) ，如果您在使用评测页面时遇到了任何问题，请联系 [pengjw@zju.edu.cn](pengjw@zju.edu.cn).
+我们在Codalab上建立了一个公共的评测页面，任何人都可以通过该页面评估他们模型在测试集上的性能。评测页面的链接是： [https://codalab.lisn.upsaclay.fr/competitions/8020](https://codalab.lisn.upsaclay.fr/competitions/8020) ，如果您在使用评测页面时遇到了任何问题，请联系 [pengjw@zju.edu.cn](mailto:pengjw@zju.edu.cn).

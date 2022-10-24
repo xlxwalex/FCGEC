@@ -35,7 +35,7 @@
 我们将这些数据分成了训练集，验证集和测试集，它们的数量分别为：36340， 2000以及3000。其他更多详细的数据请参见我们的论文。
 
 ### FCGEC语料数据
-FCGEC的训练、验证及测试数据都已放在`data`目录下，数据的格式请见`data`下的README文件。注意：测试集我们只给出了句子没有给出对应的标签，您可以通过该[Codalab评测页面](https://codalab.lisn.upsaclay.fr/competitions/8020) 提交您的模型预测结果来计算性能。
+FCGEC的训练、验证及测试数据都已放在[`data`](https://github.com/xlxwalex/FCGEC/tree/main/data) 目录下，数据的格式请见 [`data`](https://github.com/xlxwalex/FCGEC/tree/main/data) 下的README文件。注意：测试集我们只给出了句子没有给出对应的标签，您可以通过该[Codalab评测页面](https://codalab.lisn.upsaclay.fr/competitions/8020) 提交您的模型预测结果来计算性能。
 
 ## FCGEC任务
 我们的语料共有三种标签对应于纠检错的三个任务，分别如下：
@@ -103,7 +103,7 @@ OUTPUT_PATH=                        # 测试集预测输出.xlsx文件位置
 更详细的内容请见 [`scorer`](https://github.com/xlxwalex/FCGEC/tree/main/scorer) 目录下的README文件。
 
 ### 在线评测页面
-我们的测试集不直接提供三个任务的标签，因此您需要通过在线评测页面的形式提交您的测试集模型预测结果得到模型的性能指标，我们将评测页面部署在了`Codalab`上并永久开放，您可以通过下方链接进行访问：
+我们的测试集不直接提供三个任务的标签，因此您需要通过在线评测页面的形式提交您模型在测试集上的预测结果，我们会自动计算您模型的性能指标并在Leaderboard上展示（可选匿名）。我们将评测页面部署在了`Codalab`上并永久开放，您可以通过下方链接进行访问：
 <p align="center">
     <a href="https://codalab.lisn.upsaclay.fr/competitions/8020">
         <img alt="Codalab" src="https://img.shields.io/badge/ FCGEC- CodaLab-plastic?style=for-the-badge&logoColor=white&link=https://codalab.lisn.upsaclay.fr/competitions/8020&logo=codalab">
@@ -117,5 +117,5 @@ OUTPUT_PATH=                        # 测试集预测输出.xlsx文件位置
 + CTC2021评测比赛：[CTC-2021](https://destwang.github.io/CTC2021-explorer/)
 
 ## 联系我们
-1. 如果您对数据/代码有任何问题，您可以提交Issue或联系 [`xlxw@zju.edu.cn`](mailto:xlxw@zju.edu.cn)
-2. 如果您在使用评测页面有任何问题，您可以联系[`pengjw@zju.edu.cn`](mailto:pengjw@zju.edu.cn)
+1. 如果您对数据/代码有任何问题，可以提交Issue或联系 [`xlxw@zju.edu.cn`](mailto:xlxw@zju.edu.cn)
+2. 如果您在使用评测页面有任何问题，可以联系[`pengjw@zju.edu.cn`](mailto:pengjw@zju.edu.cn)
