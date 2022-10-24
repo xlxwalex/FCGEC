@@ -1,3 +1,15 @@
 [submodule "scorer/ChERRANT"]
 	path = scorer/ChERRANT
 	url = https://github.com/HillZhang1999/MuCGEC.git
+[submodule "model/pretrained-models/chinese-bert-wwm"]
+	path = model/pretrained-models/chinese-bert-wwm
+	url = https://github.com/ymcui/Chinese-BERT-wwm.git
+[submodule "model/pretrained-models/chinese-cpt"]
+	path = model/pretrained-models/chinese-cpt
+	url = https://github.com/fastnlp/CPT.git
+[submodule "model/pretrained-models/chinese-macbert"]
+	path = model/pretrained-models/chinese-macbert
+	url = https://github.com/ymcui/MacBERT.git
+[submodule "model/pretrained-models/chinese-structbert"]
+	path = model/pretrained-models/chinese-structbert
+	url = https://github.com/alibaba/AliceMind.git
