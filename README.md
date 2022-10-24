@@ -103,7 +103,7 @@ OUTPUT_PATH=                        #测试集预测输出.xlsx文件位置
 我们的测试集不直接提供三个任务的标签，因此您需要通过在线评测页面的形式提交您的测试集模型预测结果得到模型的性能指标，我们将评测页面部署在了`Codalab`上并永久开放，您可以通过下方链接进行访问：
 <p align="center">
     <a href="https://codalab.lisn.upsaclay.fr/competitions/8020">
-        <img alt="Codalab" src="https://img.shields.io/badge/CodaLab- FCGEC-plastic?style=for-the-badge&logoColor=white&link=https://codalab.lisn.upsaclay.fr/competitions/8020&logo=codalab">
+        <img alt="Codalab" src="https://img.shields.io/badge/ FCGEC- CodaLab-plastic?style=for-the-badge&logoColor=white&link=https://codalab.lisn.upsaclay.fr/competitions/8020&logo=codalab">
     </a>
 </p>
 
@@ -114,5 +114,5 @@ OUTPUT_PATH=                        #测试集预测输出.xlsx文件位置
 + CTC2021评测比赛：[CTC-2021](https://destwang.github.io/CTC2021-explorer/)
 
 ## 联系我们
-1. 如果您对数据/代码有任何问题，您可以提交Issue或联系 [`xlxw@zju.edu.cn`](`xlxw@zju.edu.cn`)
-2. 如果您在使用评测页面有任何问题，您可以联系[`pengjw@zju.edu.cn`](pengjw@zju.edu.cn)
+1. 如果您对数据/代码有任何问题，您可以提交Issue或联系 [`xlxw@zju.edu.cn`](mailto:xlxw@zju.edu.cn)
+2. 如果您在使用评测页面有任何问题，您可以联系[`pengjw@zju.edu.cn`](mailto:pengjw@zju.edu.cn)
