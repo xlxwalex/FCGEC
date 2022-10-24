@@ -1,7 +1,9 @@
-<p align="center">
+<p align="center" >
+    <a href="https://github.com/xlxwalex/FCGEC">
     <br>
     <img src="./figure/logo.png" width="275"/>
     <br>
+    </a>
 </p>
 <p align="center">
     <a href="https://github.com/xlxwalex/FCGEC/blob/main/LICENSE">
@@ -68,9 +70,7 @@ FCGEC的训练、验证及测试数据都已放在`data`目录下，数据的格
     STG模型示意图
     <br>
 </p>
-在STG模型的基础上，我们发现由于错误类型与我们设计的几种操作关系有很大的相关性，因此检错任务可以通过将错误类型判断作为辅助任务来提升纠错的性能，也就是论文中的(+TTI)。
-
-更多关于模型的信息可以参考我们的论文
+在STG模型的基础上，我们发现由于错误类型与我们设计的几种操作关系有很大的相关性，因此检错任务可以通过将错误类型判断作为辅助任务来提升纠错的性能，也就是论文中的(+TTI)。更多关于模型的信息可以参考我们的论文。
 
 ### 实验环境搭建
 我们采用Python=3.8.5作为基本环境，您可以用通过以下代码来创建环境以及安装依赖：
