@@ -92,7 +92,7 @@ BATCH_SIZE=
 MAX_GENERATE=                       # MAX T (最大生成字符数，一般设为6即可)
 CHECKPOINT_DIR=checkpoints
 PLM_PATH=                           # 预训练模型路径
-OUTPUT_PATH=                        #测试集预测输出.xlsx文件位置
+OUTPUT_PATH=                        # 测试集预测输出.xlsx文件位置
 ```
 
 ## 模型性能评测
