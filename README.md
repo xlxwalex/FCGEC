@@ -32,7 +32,7 @@
 | :------- | :---------: | :---------: | :---------: | :---------: | :---------: | 
 | **FCGEC** | `Native` | 41340 | 22517 (54.47%) | 53.1 | 1.7 | 
 
-我们将这些数据分成了训练集，验证集和测试集，它们的数量分别为：36340， 2000以及3000。其他更多详细的数据请参见我们的论文。
+我们将这些数据分成了训练集，验证集和测试集，它们的数量分别为：36340， 2000以及3000，其他更多详细的数据请参见我们的论文。
 
 ### FCGEC语料数据
 FCGEC的训练、验证及测试数据都已放在[`data`](https://github.com/xlxwalex/FCGEC/tree/main/data) 目录下，数据的格式请见 [`data`](https://github.com/xlxwalex/FCGEC/tree/main/data) 下的README文件。注意：测试集我们只给出了句子没有给出对应的标签，您可以通过该[Codalab评测页面](https://codalab.lisn.upsaclay.fr/competitions/8020) 提交您的模型预测结果来计算性能。
@@ -115,6 +115,9 @@ OUTPUT_PATH=                        # 测试集预测输出.xlsx文件位置
 + YACLC评测语料库：[YACLC](https://github.com/blcuicall/YACLC)
 + NLPCC18纠错数据集：[NLPCC18](https://github.com/zhaoyyoo/NLPCC2018_GEC)
 + CTC2021评测比赛：[CTC-2021](https://destwang.github.io/CTC2021-explorer/)
+
+## 数据使用条件
+通过下载数据或以任何方式访问数据，您同意仅将数据用于`非商业`和`学术研究`目的。除此之外，这些数据不得用于任何`非法`或`歧视性`的目的。
 
 ## 联系我们
 1. 如果您对数据/代码有任何问题，可以提交Issue或联系 [`xlxw@zju.edu.cn`](mailto:xlxw@zju.edu.cn)

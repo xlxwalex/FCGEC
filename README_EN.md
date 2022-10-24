@@ -17,10 +17,10 @@
 [**中文**](https://github.com/xlxwalex/FCGEC) | [**English**](https://github.com/xlxwalex/FCGEC/blob/main/README_EN.md)
 
 ## Introduction
-Chinese Grammatical Detection & Correction (CGED & CGEC) is a natural language processing field. Given a sentence, the error checking and correction system can determine whether there are grammatical errors in the sentence. If there are grammatical errors in the sentence, the system needs to automatically correct the erroneous text and output the correct sentence.
+Chinese Grammatical Detection & Correction (CGED & CGEC) is a natural language processing sub-field. Given a sentence, the error detection and correction system can determine whether there are grammatical errors in the sentence. If there are grammatical errors in the sentence, the system needs to automatically correct the erroneous text and output the correct sentence.
 This technology has been used in various fields such as education and retrieval, .etc.
 
-There has a lot of valuable work on datasets and models recently, but previous work on datasets has three main problems: 
+There has a lot of valuable work on datasets and models recently, but previous works on datasets have three main obstacles: 
 
 (1) The major obstacle in CGEC is that the high-quality manually annotated data is limited compared to other languages. 
 
@@ -31,8 +31,8 @@ There has a lot of valuable work on datasets and models recently, but previous w
 To tackle aforementioned obstacles, we present FCGEC, a large-scale fine-grained GEC corpus with  multiple  references. Besides, we propose Switch-Tagger-Generator (STG) model as an effective baseline to correct grammatical errors in low-resource settings.
 
 ## FCGEC Corpus
-Our data sources are mainly examination questions from elementary, middle and high school students and news aggregation websites. In order to provice more reference modifications to the sentences to achieve diverse annotation goals, each sentence is randomly assigned to 2 to 4 annotators for annotation. 
-We collected 54,026 raw sentences from the two data sources, and after de-duplicating and filtering out problematic sentences (e.g., text truncation, etc.), FCGEC contains 41,340 sentences in total. The statistical information of the data is shown in the following table:
+Our data sources are mainly examination questions from elementary, middle and high school students and news aggregation websites. In order to provide more reference modifications to the sentences to achieve diverse annotation goals, each sentence is randomly assigned to 2 to 4 annotators for annotation. 
+We collect 54,026 raw sentences from the two data sources, and after de-duplicating and filtering out problematic sentences (e.g., text truncation, etc.), FCGEC contains 41,340 sentences in total. The statistical information of the data is shown in the following table:
 
  Corpus | Source| Sentences | #Error(%) | Avg. Length | Avg. Reference | 
 | :------- | :---------: | :---------: | :---------: | :---------: | :---------: | 
@@ -41,7 +41,7 @@ We collected 54,026 raw sentences from the two data sources, and after de-duplic
 We divide these data into train, validation and test sets with the numbers 36340, 2000 and 3000 respectively.
 And more detailed statistics are available in our paper.
 ### How to Access FCGEC
-The train, validation and test data for our FCGEC are placed in the `data` directory，the format of the data can be found in the README file.
+The train, validation and test data for our FCGEC are placed in the [`data`](https://github.com/xlxwalex/FCGEC/tree/main/data) directory, the format of the data can be found in the README file.
 
 ***Note:*** For the test set we only provide the sentences without the corresponding labels, which you can evaluate your model by visiting [Codalab Page](https://codalab.lisn.upsaclay.fr/competitions/8020) to calculate the performances.
 
@@ -66,7 +66,7 @@ For the error correction task of FCGEC, we propose the STG (Switch-Tagger-Genera
 + `Tagger`Module: Predict the operation on each character for error correction (KEEP, DELETE, INSERT, MODIFY).And for INSERT and MODIFY operations, the module need to identify the number of characters (T) to be inserted or substituted
 + `Generator`Module: When it comes to operations like INSERT and MODIFY that require changing characters, we can apply MLM to generate new characters via the pre-trained models
 
-***Note:*** The modules of our STG model are free to each other, so they can train `independently` or `jointly`. However, the inference phase is conducted in the form of Pipeline fashion.
+***Note:*** The modules of our STG model are independent to each other, so they can train `independently` or `jointly`. However, the inference phase is conducted in the form of Pipeline fashion.
 
 <p align="center">
     <br>
@@ -126,6 +126,9 @@ Our test set does not provide labels for the three tasks directly, so you will n
 + NLPCC18 Dataset：[NLPCC18](https://github.com/zhaoyyoo/NLPCC2018_GEC)
 + CTC2021 Competition：[CTC-2021](https://destwang.github.io/CTC2021-explorer/)
 
+## Terms and Conditions
+By downloading the data or by accessing it any manner, you agree not to redistribute the data. Our data can only used for non-commercial and academic-research purposes. The data must not be used for any unlawful or discriminatory purpose.
+
 ## Hwo to Contact Us
-1. If you have any questions about the data / code, you can submit an Issue or contact [`xlxw@zju.edu.cn`](mailto:xlxw@zju.edu.cn)
+1. If you have any questions about the data / code, feel free to submit an Issue or contact [`xlxw@zju.edu.cn`](mailto:xlxw@zju.edu.cn)
 2. If you have any questions about the evaluation page, you can contact [`pengjw@zju.edu.cn`](mailto:pengjw@zju.edu.cn)
