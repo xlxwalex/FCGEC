@@ -50,7 +50,7 @@ FCGEC的训练、验证及测试数据都已放在`data`目录下，数据的格
 
 关于以上任务，更多详细的信息以及实例请参考我们的论文。
 
-## STG 模型
+## STG纠错模型
 对于FCGEC的纠错任务，我们提出了STG (Switch-Tagger-Generator)模型，如下图所示。其由三个模块组成：
 + `Switch`模块：利用指针网络来确定句子中字符序列的顺序
 + `Tagger`模块：预测纠错需要对每个字符进行操作 (保持-KEEP， 删除-DELETE， 插入-INSERT， 修改-MODIFY)，并且对于插入和修改操作还需要确定操作的字符的数量T
@@ -60,9 +60,10 @@ FCGEC的训练、验证及测试数据都已放在`data`目录下，数据的格
 
 <p align="center">
     <br>
-    <img src="./figure/stg.png" width="275"/>
+    <img src="./figure/stg.png" width="300"/>
     <br>
 </p>
+< center>STG模型示意图< /center>
 
 在STG模型的基础上，我们发现由于错误类型与我们设计的几种操作关系有很大的相关性，因此检错任务可以通过将错误类型判断作为辅助任务来提升纠错的性能，也就是论文中的(+TTI)。
 
@@ -77,7 +78,7 @@ pip install -r requirements.txt
 ```
 
 ### 训练及测试
-STG模型训练-测试bash文件共有三个：`run_stg_indep.sh`, `run_stg_tti.sh`以及`run_stg_joint.sh`，分别对应论文中的`STG-Indep`，`STG-Indep+TTI`以及`STG-Joint`。具体细节可参考 `model/STG-correction/run_stg_indep.sh`，`model/STG-correction/run_stg_tti.sh`和`model/STG-correction/run_stg_joint.sh`。
+STG模型训练-测试bash文件共有三个：[`run_stg_indep.sh`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/run_stg_indep.sh) , [`run_stg_tti.sh`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/run_stg_tti.sh) 以及[`run_stg_joint.sh`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/run_stg_joint.sh) ，分别对应论文中的`STG-Indep`，`STG-Indep+TTI`以及`STG-Joint`。具体细节可参考 `model/STG-correction/run_stg_indep.sh`，`model/STG-correction/run_stg_tti.sh`和`model/STG-correction/run_stg_joint.sh`。
 
 ***注意***：在使用前请先配置bash文件头部的参数：
 ```shell
@@ -90,3 +91,28 @@ CHECKPOINT_DIR=checkpoints
 PLM_PATH=                           # 预训练模型路径
 OUTPUT_PATH=                        #测试集预测输出.xlsx文件位置
 ```
+
+## 模型性能评测
+对于***错误检测*** 以及***错误类型检测*** 两个任务，我们采用`Accuracy`, `Precision`, `Recall` 以及 `Macro F1 score` 作为衡量模型性能的依据。
+
+对于***文本纠错任务***，我们采用了`Exact Match`以及`character-level edit metric` ([MuCGEC](https://github.com/HillZhang1999/MuCGEC) 中提出)作为评价指标。
+
+更详细的内容请见 [`scorer`](https://github.com/xlxwalex/FCGEC/tree/main/scorer) 目录下的README文件。
+
+### 在线评测页面
+我们的测试集不直接提供三个任务的标签，因此您需要通过在线评测页面的形式提交您的测试集模型预测结果得到模型的性能指标，我们将评测页面部署在了`Codalab`上并永久开放，您可以通过下方链接进行访问：
+<p align="center">
+    <a href="https://codalab.lisn.upsaclay.fr/competitions/8020">
+        <img alt="Codalab" src="https://img.shields.io/badge/CodaLab- FCGEC-plastic?style=for-the-badge&logoColor=white&link=https://codalab.lisn.upsaclay.fr/competitions/8020&logo=codalab">
+    </a>
+</p>
+
+## 相关数据集工作
++ MuCGEC评测数据集：[MuCGEC](https://github.com/HillZhang1999/MuCGEC/)
++ YACLC评测语料库：[YACLC](https://github.com/blcuicall/YACLC)
++ NLPCC18纠错数据集：[NLPCC18](https://github.com/zhaoyyoo/NLPCC2018_GEC)
++ CTC2021评测比赛：[CTC-2021](https://destwang.github.io/CTC2021-explorer/)
+
+## 联系我们
+1. 如果您对数据/代码有任何问题，您可以提交Issue或联系 [`xlxw@zju.edu.cn`](`xlxw@zju.edu.cn`)
+2. 如果您在使用评测页面有任何问题，您可以联系[`pengjw@zju.edu.cn`](pengjw@zju.edu.cn)
