@@ -48,7 +48,7 @@ FCGEC的训练、验证及测试数据都已放在`data`目录下，数据的格
     5. 结构混乱 (Structure Confusion, SC)
     6. 不合逻辑 (Illogical, ILL)
     7. 语意不明 (Ambiguity, AM)
-+ ***文本纠错 (error correction)：*** 给定一个句子，模型输入对应的无语法错误句子
++ ***文本纠错 (error correction)：*** 给定一个句子，模型输出对应的无语法错误句子
 
 关于以上任务，更多详细的信息以及实例请参考我们的论文。
 
