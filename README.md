@@ -83,7 +83,7 @@ pip install -r requirements.txt
 ### 训练及测试
 STG模型训练-测试bash文件共有三个：[`run_stg_indep.sh`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/run_stg_indep.sh) , [`run_stg_tti.sh`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/run_stg_tti.sh) 以及[`run_stg_joint.sh`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/run_stg_joint.sh) ，分别对应论文中的`STG-Indep`，`STG-Indep+TTI`以及`STG-Joint`。具体细节可参考 `model/STG-correction/run_stg_indep.sh`，`model/STG-correction/run_stg_tti.sh`和`model/STG-correction/run_stg_joint.sh`。
 
-***注意***：在使用前请先配置bash文件头部的参数：
+***注意***：请在使用脚本前将[`data`](https://github.com/xlxwalex/FCGEC/tree/main/data) 目录下的三个json数据集放到程序目录中的`dataset`下。另外您需要在使用前先配置bash文件头部的参数：
 ```shell
 CUDA_ID=   
 SEED=                               # 随机数种子
@@ -107,6 +107,23 @@ OUTPUT_PATH=                        # 测试集预测输出.xlsx文件位置
 <p align="center">
     <a href="https://codalab.lisn.upsaclay.fr/competitions/8020">
         <img alt="Codalab" src="https://img.shields.io/badge/ FCGEC- CodaLab-plastic?style=for-the-badge&logoColor=white&link=https://codalab.lisn.upsaclay.fr/competitions/8020&logo=codalab">
+    </a>
+</p>
+
+## 引用
+如果您使用了我们的数据或者认为我们的工作对您有帮助，您可以引用我们的论文：
+***FCGEC: Fine-Grained Corpus for Chinese Grammatical Error Correction***
+```
+@inproceedings{xu2022fcgec,
+  author = {Lvxiaowei Xu and Jianwang Wu and Jiawei Peng and Jiayu Fu and Ming Cai},
+  title = {FCGEC: Fine-Grained Corpus for Chinese Grammatical Error Correction},
+  booktitle = {Findings of the Association for Computational Linguistics: EMNLP 2022},
+  year = {2022}
+}
+```
+<p align="center">
+    <a href="https://arxiv.org/abs/2210.12364">
+        <img alt="Arxiv" src="https://img.shields.io/badge/ FCGEC- Paper-plastic?logo=arXiv&style=for-the-badge&logoColor=white&color=blue&link=https://arxiv.org/abs/2210.12364">
     </a>
 </p>
 

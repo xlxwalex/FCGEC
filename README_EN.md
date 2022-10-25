@@ -120,6 +120,23 @@ Our test set does not provide labels for the three tasks directly, so you will n
     </a>
 </p>
 
+## How to cite
+If you are using our code or data, please cite our paper: 
+***FCGEC: Fine-Grained Corpus for Chinese Grammatical Error Correction***
+```
+@inproceedings{xu2022fcgec,
+  author = {Lvxiaowei Xu and Jianwang Wu and Jiawei Peng and Jiayu Fu and Ming Cai},
+  title = {FCGEC: Fine-Grained Corpus for Chinese Grammatical Error Correction},
+  booktitle = {Findings of the Association for Computational Linguistics: EMNLP 2022},
+  year = {2022}
+}
+```
+<p align="center">
+    <a href="https://arxiv.org/abs/2210.12364">
+        <img alt="Arxiv" src="https://img.shields.io/badge/ FCGEC- Paper-plastic?logo=arXiv&style=for-the-badge&logoColor=white&color=blue&link=https://arxiv.org/abs/2210.12364">
+    </a>
+</p>
+
 ## Related work
 + MuCGEC Dataset：[MuCGEC](https://github.com/HillZhang1999/MuCGEC/)
 + YACLC Dataset：[YACLC](https://github.com/blcuicall/YACLC)
