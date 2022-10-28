@@ -49,7 +49,7 @@ python joint_stg.py --mode train \
 --epoch ${EPOCH} \
 --max_generate ${MAX_GENERATE}
 
-# STEP 3 - TRAIN STG-Joint MODEL
+# STEP 3 - EVALUATE STG-Joint MODEL
 python joint_evaluate.py --mode test --gpu_id ${CUDA_ID} --seed ${SEED} \
 --checkpoints ${CHECKPOINT_DIR} --checkp ${JOINT_CHECK_DIR}  \
 --export ${OUTPUT_PATH} \

@@ -104,6 +104,16 @@ PLM_PATH=                           # Pre-trained model path
 OUTPUT_PATH=                        # Prediction output of .xlsx file for STG model
 ```
 
+### Checkpoint File
+We provide checkpoint files of our STG trained on the FCGEC corpus to facilitate testing:
+
+| Model | PLM Backbone | Performance (EM/F0.5) | Download Link | Version |
+| :------- | :---------: | :---------: | :---------: | :---------: | 
+| **FCGEC-Joint** | [`RoBERTa-Base-Chinese`](https://huggingface.co/hfl/chinese-roberta-wwm-ext) | 34.10 / 45.48 | [FCGEC_checkpoints.pt](https://expic.xlxw.org/fcgec/checkpoints.pt) | `221021`
+
+***Usege:*** You can place this checkpoint file in the [`model/STG-correction/checkpoints`](https://github.com/xlxwalex/FCGEC/tree/main/model/STG-correction/checkpoints)  folder. Then [`joint_evaluate.py`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/joint_evaluate.py) can be utilized for testing on FCGEC testset. For details on how to use it, please refer to the `STEP3` part in [`run_stg_joint.sh`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/run_stg_joint.sh) .
+
+
 ## Model Evaluation
 For ***Error Detection*** and ***Type Identification*** tasks, We adopt `Accuracy`, `Precision`, `Recall` and `Macro F1 score` as the metric to evaluate the performances of the models.
 
