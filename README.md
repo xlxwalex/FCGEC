@@ -147,4 +147,4 @@ OUTPUT_PATH=                        # 测试集预测输出.xlsx文件位置
 
 ## 联系我们
 1. 如果您对数据/代码有任何问题，可以提交Issue或联系 [`xlxw@zju.edu.cn`](mailto:xlxw@zju.edu.cn)
-2. 如果您在使用评测页面有任何问题，可以联系[`pengjw@zju.edu.cn`](mailto:pengjw@zju.edu.cn)
+2. 如果您在使用评测页面有任何问题，可以联系[`pengjw@zju.edu.cn`](mailto:pengjw@zju.edu.cn)，推荐您在联系时顺便抄送一份给[`xlxw@zju.edu.cn`](mailto:xlxw@zju.edu.cn)
