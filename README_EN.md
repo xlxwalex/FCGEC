@@ -85,7 +85,7 @@ More information about the model can be found in our paper.
 We adopt `Python=3.8.5` as the base environment, You can create the environment and install the dependencies with the following code:
 ```shell
 conda create -n stg_env python=3.8.5
-conda activate stg_env
+source activate stg_env
 pip install -r requirements.txt
 ```
 
@@ -158,4 +158,4 @@ By downloading the data or by accessing it any manner, you agree not to redistri
 
 ## Hwo to Contact Us
 1. If you have any questions about the data / code, feel free to submit an Issue or contact [`xlxw@zju.edu.cn`](mailto:xlxw@zju.edu.cn)
-2. If you have any questions about the evaluation page, you can contact [`pengjw@zju.edu.cn`](mailto:pengjw@zju.edu.cn). (***Recommend*** : you to send a copy to [`xlxw@zju.edu.cn`](mailto:xlxw@zju.edu.cn))
+2. If you have any questions about the evaluation page, you can contact [`pengjw@zju.edu.cn`](mailto:pengjw@zju.edu.cn). (***Recommend*** : send a copy to [`xlxw@zju.edu.cn`](mailto:xlxw@zju.edu.cn))

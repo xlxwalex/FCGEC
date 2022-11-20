@@ -76,7 +76,7 @@ FCGEC的训练、验证及测试数据都已放在[`data`](https://github.com/xl
 我们采用Python=3.8.5作为基本环境，您可以用通过以下代码来创建环境以及安装依赖：
 ```shell
 conda create -n stg_env python=3.8.5
-conda activate stg_env
+source activate stg_env
 pip install -r requirements.txt
 ```
 
