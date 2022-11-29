@@ -5,14 +5,15 @@ from utils.argument import ArgumentGroup
 import json
 import os
 import pandas as pd
-import numpy as np
 from tqdm import tqdm
+import scipy.io as sio
 
 def args_parse():
     parser = argparse.ArgumentParser(description='FCGEC preprocess params')
     base_args = ArgumentGroup(parser, 'base', 'Base Settings')
 
     base_args.add_arg('mode', str, 'normal', 'STG Mode')
+    base_args.add_arg('out_uuid', bool, True, 'Output UUID in test file')
     base_args.add_arg('err_only', bool, True, 'Construct error dataset')
     base_args.add_arg('data_dir', str, 'dataset', 'Dataset path')
     base_args.add_arg('out_dir', str, 'STG-Indep', 'Output path')
@@ -43,7 +44,7 @@ def process_train_valid(path, desc = 'train', err_only = True, need_type = False
     else:
         return pd.DataFrame(corrects, columns=['Sentence', 'Label'])
 
-def process_test(path) -> pd.DataFrame:
+def process_test(path, output_uuid : bool=False):
     print('[TASK] processing test file.')
     with open(path, 'r', encoding='utf-8') as fp:
         data = json.load(fp)
@@ -53,7 +54,10 @@ def process_test(path) -> pd.DataFrame:
         element = data[key]
         sentence = element['sentence']
         corrects.append([sentence, "[]"])
-    return pd.DataFrame(corrects, columns=['Sentence', 'Label'])
+    if output_uuid:
+        return pd.DataFrame(corrects, columns=['Sentence', 'Label']), list(data.keys())
+    else:
+        return pd.DataFrame(corrects, columns=['Sentence', 'Label'])
 
 def preprocess_independent(args):
     print('=' * 20 + "Preprocess Data for STG Independent" + "=" * 20)
@@ -74,7 +78,12 @@ def preprocess_independent(args):
     valid_df.to_csv(os.path.join(args.data_dir, args.out_dir, 'valid.csv'), index=False, encoding='utf_8_sig')
     print('Processed valid dataset, saved at %s' % os.path.join(os.path.join(args.data_dir, args.out_dir, 'valid.csv')))
     if args.test_file != '':
-        test_df = process_test(os.path.join(args.data_dir, args.test_file))
+        if args.out_uuid:
+            test_df, uuid = process_test(os.path.join(args.data_dir, args.test_file), output_uuid=True)
+            sio.savemat(os.path.join(args.data_dir, args.out_dir, 'uuid.mat'), {'uuid' : uuid})
+            print('Save test uuid file at %s' % os.path.join(args.data_dir, args.out_dir, 'uuid.mat'))
+        else:
+            test_df = process_test(os.path.join(args.data_dir, args.test_file))
         test_df.to_csv(os.path.join(args.data_dir, args.out_dir, 'test.csv'), index=False, encoding='utf_8_sig')
         print('Processed test dataset, saved at %s' % os.path.join(os.path.join(args.data_dir, args.out_dir, 'test.csv')))
 
@@ -97,7 +106,12 @@ def preprocess_independent_TTI(args):
     valid_df.to_csv(os.path.join(args.data_dir, args.out_dir, 'valid.csv'), index=False, encoding='utf_8_sig')
     print('Processed valid dataset, saved at %s' % os.path.join(os.path.join(args.data_dir, args.out_dir, 'valid.csv')))
     if args.test_file != '':
-        test_df = process_test(os.path.join(args.data_dir, args.test_file))
+        if args.out_uuid:
+            test_df, uuid = process_test(os.path.join(args.data_dir, args.test_file), output_uuid=True)
+            sio.savemat(os.path.join(args.data_dir, args.out_dir, 'uuid.mat'), {'uuid': uuid})
+            print('Save test uuid file at %s' % os.path.join(args.data_dir, args.out_dir, 'uuid.mat'))
+        else:
+            test_df = process_test(os.path.join(args.data_dir, args.test_file))
         test_df.to_csv(os.path.join(args.data_dir, args.out_dir, 'test.csv'), index=False, encoding='utf_8_sig')
         print('Processed test dataset, saved at %s' % os.path.join(os.path.join(args.data_dir, args.out_dir, 'test.csv')))
 

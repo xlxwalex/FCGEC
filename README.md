@@ -89,11 +89,14 @@ CUDA_ID=
 SEED=                               # 随机数种子
 EPOCH=     
 BATCH_SIZE=  
-MAX_GENERATE=                       # MAX T (最大生成字符数，一般设为6即可)
+MAX_GENERATE=                       # MAX T (最大生成字符数，一般设为6即可，若使用下方checkpoint[版本221021]请设为5)
 CHECKPOINT_DIR=checkpoints
 PLM_PATH=                           # 预训练模型路径
 OUTPUT_PATH=                        # 测试集预测输出.xlsx文件位置
 ```
+
+### 程序更新信息
++ (2022/11/29) 根据`GMago123`的反馈([ISSUE#3](https://github.com/xlxwalex/FCGEC/issues/3)) ，为了便于提交评测，我们在Joint的输出XLSX文件中加入了对应的UID字段
 
 ### 模型参数文件
 我们提供在FCGEC语料上训练好的模型checkpoint文件，以方便大家使用测试：
@@ -102,7 +105,7 @@ OUTPUT_PATH=                        # 测试集预测输出.xlsx文件位置
 | :------- | :---------: | :---------: | :---------: | :---------: | 
 | **FCGEC-Joint** | [`RoBERTa-Base-Chinese`](https://huggingface.co/hfl/chinese-roberta-wwm-ext) | 34.10 / 45.48 | [FCGEC_checkpoints.pt](https://expic.xlxw.org/fcgec/checkpoints.pt) | `221021`
 
-***使用方式：*** 您可以将该checkpoint文件放到[`model/STG-correction/checkpoints`](https://github.com/xlxwalex/FCGEC/tree/main/model/STG-correction/checkpoints) 文件夹中，之后使用[`joint_evaluate.py`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/joint_evaluate.py) 文件来得到测试集的预测结果，具体使用方式可以参考[`run_stg_joint.sh`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/run_stg_joint.sh) 的 `STEP 3`部分。
+***使用方式：*** 您可以将该checkpoint文件放到[`model/STG-correction/checkpoints`](https://github.com/xlxwalex/FCGEC/tree/main/model/STG-correction/checkpoints) 文件夹中，之后使用[`joint_evaluate.py`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/joint_evaluate.py) 文件来得到测试集的预测结果，具体使用方式可以参考[`run_stg_joint.sh`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/run_stg_joint.sh) 的 `STEP 3`部分 (***注意***：如果您使用该checkpoint，请将`MAX_GENERATE`设置为5进行使用，具体请见 [ISSUE#3](https://github.com/xlxwalex/FCGEC/issues/3) ，感谢`GMago123`的反馈)。
 
 ## 模型性能评测
 对于***错误检测*** 以及***错误类型检测*** 两个任务，我们采用`Accuracy`, `Precision`, `Recall` 以及 `Macro F1 score` 作为衡量模型性能的依据。

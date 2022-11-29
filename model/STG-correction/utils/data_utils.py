@@ -49,9 +49,6 @@ def compare_iner_operate(sentence : str, ops : list) -> dict:
         return iner_same_compare(sentence, min_ops)
     else: return ops[argmin]
 
-
-
-
 def data_filter(sentences : list, operates : list):
     filter_operates = []
     print('>>> Select Operate Mode')
@@ -281,6 +278,11 @@ def output_switch_analysis(args, testdata, pred_tokens, gts_tokens):
         out_data.append([sentence, pred_sentence,flag,  label])
     return pd.DataFrame(np.array(out_data), columns=['Sentence', 'Preds', 'Switch', 'Label'])
 
+def obtain_uuid(file_path : str):
+    with open(file_path, 'r', encoding='utf-8') as fp:
+        test_data = json.load(fp)
+    fp.close()
+    return list(test_data.keys())
 
 def joint_report(args, file_path : str, res_info : list, testset):
     binary_res, types_res, switch_res, tagger_res, gen_res = res_info
@@ -321,13 +323,15 @@ def joint_report(args, file_path : str, res_info : list, testset):
     df = pd.DataFrame(np.array(results), columns=['Sentence', 'Binary_Pred', 'Binary_Gt', 'Binary_Flag', 'Type_Pred', 'Type_Gt', 'Type_Flag', 'Switch_Pred', 'Switch_Gt', 'Switch_Flag', 'Switch_Label', 'need_switch', 'Tagger_Pred', 'Generate_Pred', 'Tagger_Gt', 'Tagger_Flag', 'Operate'])
     df.to_csv(file_path, index=False, encoding='utf_8_sig')
 
-def report_pipeline_output(out_path, sentences, labels, switchs, taggers, outputs, tgt_tokens = None, eq_label = None):
+def report_pipeline_output(out_path, sentences, labels, switchs, taggers, outputs, tgt_tokens = None, eq_label = None, uuid = None):
     workbook = xlsxwriter.Workbook(out_path)
     worksheet = workbook.add_worksheet('data')
     if tgt_tokens is not None:
         header = ['Sentence', 'Label', 'Switch', 'Tagger', 'Output', 'tgt', 'Eq']
     else:
         header = ['Sentence', 'Label', 'Switch', 'Tagger', 'Output']
+    if uuid is not None:
+        header = ['UUID'] + header
     worksheet.write_row(0, 0, header)
     row_id = 1
     size = len(sentences)
@@ -340,6 +344,8 @@ def report_pipeline_output(out_path, sentences, labels, switchs, taggers, output
         eqlab  = eq_label[idx] if eq_label is not None else None
         tgt = tgt_tokens[idx] if tgt_tokens is not None else None
         collection = [sentence, json.dumps(label, ensure_ascii=False), switch, tagger, output, tgt, eqlab] if tgt_tokens is not None else [sentence, json.dumps(label, ensure_ascii=False), switch, tagger, output]
+        if uuid is not None:
+            collection = [uuid[idx]] + collection
         worksheet.write_row(row_id, 0, collection)
         row_id += 1
     workbook.close()

@@ -15,6 +15,7 @@ from utils import padding, attention_mask, SwitchSearch
 from tqdm import tqdm
 from utils import reconstruct_tagger_V2 as reconstruct_tagger, fillin_tokens, extract_generate_tokens
 import numpy as np
+import scipy.io as sio
 
 def _apply_switch_operator(wd_idxs: list, switch_ops: list) -> list:
     res = []
@@ -34,6 +35,10 @@ def evaluate(args):
     device = get_device(args.cuda, args.gpu_id)
     # Switch
     test_dir = os.path.join(args.data_base_dir, 'test.csv')
+    if os.path.exists(os.path.join(args.data_base_dir, 'uuid.mat')):
+        uuid = sio.loadmat(os.path.join(args.data_base_dir, 'uuid.mat'))['uuid']
+    else:
+        uuid = None
 
     switch_test = SwitchDataset(args, test_dir, 'test')
     params = torch.load(os.path.join(args.checkpoints, args.checkp, 'checkpoint.pt'))["model"]
@@ -118,7 +123,7 @@ def evaluate(args):
     switch_tokens = [''.join(switch_test.tokenizer.convert_ids_to_tokens(ele[1:-1])).replace('##', '').replace('[UNK]', '"').replace('[PAD]', '') for ele in switch_tokens]
     tagger_tokens = [''.join(tagger_test.tokenizer.convert_ids_to_tokens(ele[1:-1])).replace('##', '').replace('[UNK]', '"').replace('[PAD]', '') for ele in tag_tokens]
     generate_tokens = [''.join(generator_test.tokenizer.convert_ids_to_tokens(ele[1:-1])).replace('##', '').replace('[UNK]', '"').replace('[PAD]', '') for ele in outputs]
-    report_pipeline_output(os.path.join(args.data_base_dir, args.export), switch_test.sentences, switch_test.label, switch_tokens, tagger_tokens, generate_tokens)
+    report_pipeline_output(os.path.join(args.data_base_dir, args.export), switch_test.sentences, switch_test.label, switch_tokens, tagger_tokens, generate_tokens, uuid=uuid)
     print('Final output saved at %s' % os.path.join(args.data_base_dir, args.export))
 
 if __name__ == '__main__':

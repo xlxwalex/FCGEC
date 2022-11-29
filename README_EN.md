@@ -111,7 +111,7 @@ We provide checkpoint files of our STG trained on the FCGEC corpus to facilitate
 | :------- | :---------: | :---------: | :---------: | :---------: | 
 | **FCGEC-Joint** | [`RoBERTa-Base-Chinese`](https://huggingface.co/hfl/chinese-roberta-wwm-ext) | 34.10 / 45.48 | [FCGEC_checkpoints.pt](https://expic.xlxw.org/fcgec/checkpoints.pt) | `221021`
 
-***Usege:*** You can place this checkpoint file in the [`model/STG-correction/checkpoints`](https://github.com/xlxwalex/FCGEC/tree/main/model/STG-correction/checkpoints)  folder. Then [`joint_evaluate.py`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/joint_evaluate.py) can be utilized for testing on FCGEC testset. For details on how to use it, please refer to the `STEP3` part in [`run_stg_joint.sh`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/run_stg_joint.sh) .
+***Usege:*** You can place this checkpoint file in the [`model/STG-correction/checkpoints`](https://github.com/xlxwalex/FCGEC/tree/main/model/STG-correction/checkpoints)  folder. Then [`joint_evaluate.py`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/joint_evaluate.py) can be utilized for testing on FCGEC testset. For details on how to use it, please refer to the `STEP3` part in [`run_stg_joint.sh`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/run_stg_joint.sh) (***Note***: You need to set `MAX_GENERATE` to 5 when using the checkpoint 221021. More details can be found in [ISSUE#3](https://github.com/xlxwalex/FCGEC/issues/3)).
 
 
 ## Model Evaluation
