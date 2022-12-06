@@ -18,10 +18,10 @@ Each parameter in the script has a default value, so it can be run directly:
 ```bash
 python convert_fcgec_to_seq2seq.py
 ```
-Meaning of parameters(参数含义)：
+Meaning of parameters(可选的参数含义)：
 + ***out_uuid*** : Whether to output uuid column [True / False] (是否输出uuid列)
 + ***data_dir*** : Path of FCGEC data (FCGEC数据文件夹)
-+ ***out_dir*** : Path of output for seq2seq data [True / False] (输出文件夹，默认和FCGEC数据文件夹相同)
++ ***out_dir*** : Path of output for seq2seq data (输出文件夹，默认和FCGEC数据文件夹相同)
 + ***train_file***: Name of train data file (训练集的文件名，为空则不处理训练集)
 + ***valid_file***: Name of valid data file (验证集的文件名，为空则不处理验证集)
 + ***out_errflag***: Name of test data file (是否输出`error_flag`，用于指示是否为病句)
