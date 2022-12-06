@@ -103,6 +103,9 @@ CHECKPOINT_DIR=checkpoints
 PLM_PATH=                           # Pre-trained model path
 OUTPUT_PATH=                        # Prediction output of .xlsx file for STG model
 ```
+### New Features
++ (2022/11/29) Add `uuid` column to the output xlsx file of [`run_stg_tti.sh`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/run_stg_tti.sh).
++ (2022/12/06) Add a script file [convert_fcgec_to_seq2seq.py](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/scripts/convert_fcgec_to_seq2seq.py) which can convert our FCGEC data to seq2seq format. More details are shown in the README of [`scripts`](https://github.com/xlxwalex/FCGEC/tree/main/model/STG-correction/scripts) folder.
 
 ### Checkpoint File
 We provide checkpoint files of our STG trained on the FCGEC corpus to facilitate testing:

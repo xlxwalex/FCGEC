@@ -24,8 +24,9 @@ Meaning of parameters(可选的参数含义)：
 + ***out_dir*** : Path of output for seq2seq data (输出文件夹，默认和FCGEC数据文件夹相同)
 + ***train_file***: Name of train data file (训练集的文件名，为空则不处理训练集)
 + ***valid_file***: Name of valid data file (验证集的文件名，为空则不处理验证集)
-+ ***out_errflag***: Name of test data file (是否输出`error_flag`，用于指示是否为病句)
-+ ***out_errtype***: Name of test data file (是否输出`error_type`，用于指定病句的错误类型)
++ ***test_file***: Name of test data file (测试集的文件名，为空则不处理测试集)
++ ***out_errflag***: Whether to output out_errflag column [True / False] (是否输出`error_flag`，用于指示是否为病句)
++ ***out_errtype***: Whether to output out_errtype column [True / False] (是否输出`error_type`，用于指定病句的错误类型)
 
 ***Note(注意)：*** Since we have multiple references for our operation labels, the output will also have multiple sequences. We use `\t` as a separator between them. 
 
