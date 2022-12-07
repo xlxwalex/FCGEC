@@ -37,6 +37,9 @@
 ### FCGEC语料数据
 FCGEC的训练、验证及测试数据都已放在[`data`](https://github.com/xlxwalex/FCGEC/tree/main/data) 目录下，数据的格式请见 [`data`](https://github.com/xlxwalex/FCGEC/tree/main/data) 下的README文件。注意：测试集我们只给出了句子没有给出对应的标签，您可以通过该[Codalab评测页面](https://codalab.lisn.upsaclay.fr/competitions/8020) 提交您的模型预测结果来计算性能。
 
+### 语料更新信息
++ (2022/12/07 勘误) 感谢`nghuyong`的反馈([ISSUE#6](https://github.com/xlxwalex/FCGEC/issues/6)) ，`FCGEC_train.json`(1023)版本存在问题，该版本为中间过程语料被错误上传(有部分样本存在`error_flag`错误，以及缺少所有的正确句子样本)，目前该文件已重新上传
+
 ## FCGEC任务
 我们的语料共有三种标签对应于纠检错的三个任务，分别如下：
 + ***错误检测 (error detection)：*** 模型需要判断给定的句子是否包含语法错误 (二分类任务)
