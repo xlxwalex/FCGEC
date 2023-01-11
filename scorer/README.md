@@ -16,7 +16,7 @@ We employ two different metrics :
 + ***完全匹配***: 模型纠错输出正确的样本（模型的纠正输出在候选答案中）占全部错误样本的百分比
 + ***字符级编辑指标***：这是[MuCGEC](https://github.com/HillZhang1999/MuCGEC)中提出的衡量纠错性能的指标，更详情可以参考他们的论文。
 
-***注意***：你可以通过上面的`ChERRANT @ dac5c3f`文件夹进入MuCGEC作者的仓库，计算程序在它们仓库的`scorers/ChERRANT`路径下。需要注意的是，在计算以上两个指标前，请去掉文本中所有的标点符号。
+***注意***：你可以通过上面的`ChERRANT @ dac5c3f`文件夹进入MuCGEC作者的仓库，计算程序在他们仓库的`scorers/ChERRANT`路径下。需要注意的是，在计算以上两个指标前，请去掉文本中所有的标点符号。
 
 ## Online Evaluation
 We have established an evaluation page in codalab for everyone to evaluate their systems on test set. The link url is: [https://codalab.lisn.upsaclay.fr/competitions/8020](https://codalab.lisn.upsaclay.fr/competitions/8020). If you have an question when using evaluation system, feel free to contact [pengjw@zju.edu.cn](pengjw@zju.edu.cn).
