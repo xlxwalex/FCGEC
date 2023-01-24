@@ -31,3 +31,31 @@ Meaning of parameters(可选的参数含义)：
 ***Note(注意)：*** Since we have multiple references for our operation labels, the output will also have multiple sequences. We use `\t` as a separator between them. 
 
 我们的操作标签有多个参考，因此输出也会有多个矫正文本的序列，它们之间是用`\t`作为分隔的。
+
+## 2 Seq2Operate
+***(2023/01/25) [convert_seq2seq_to_operation.py](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/scripts/convert_seq2seq_to_operation.py)***
+
+This script is utilized to convert the seq2seq data to operation labels as our FCGEC data into facilitate training for STG models.
+该脚本用于将Seq2Seq的数据转化为FCGEC的操作标签类型数据（该脚本实现为论文的Algorithm 1），方便直接用于STG模型的训练
+
+***Usage(使用方式)：***
+
+We provide a kernel method - min_dist_opt(sentence1, sentence2) for converting single instance, while `sentence1` is the original sentence and `sentence2` is the corrected sentence.
+我们在脚本中提供了一个核心方法 - min_dist_opt(sentence1, sentence2)来转换单个的实例（错误-修正的句子对），其中`sentence1`是原始句子(带有语病的句子)而`sentence2`则是修改后的正确句子
+
+Examples for the four types of operation (Switch, Delete, Insert and Modify) are demonstrated in the py script.
+我们在python脚本中展示了四种操作方法(Switch, Delete, Insert 和 Modify)的例子
+
+Meaning of parameters(可选的参数含义)：
++ ***COLLOCATION*** : (Flag in Line 16) Whether for adapting to collocation searching for Modify operations (是否为Modify操作开启搭配查找模式)
+
+***Example for COLLOCATION flag (COLLOCATION开关的例子):***
+
+Sentence: 经典计算机无法解决的大规模计算难题提取有效解决方案。
+
+Correction: (提取->提供)经典计算机无法解决的大规模计算难题提供有效解决方案。
+
+* `COLLOCATION` = `TRUE` : Operation = {'Modify': [{'pos': 47, 'tag': 'MOD_2', 'label': '提供'}]}
+* `COLLOCATION` = `FALSE` : Operation = {'Modify': [{'pos': 48, 'tag': 'MOD_1', 'label': '供'}]}
+
+***Note(注意)：*** `COLLOCATION` mode rely on the `jieba` package (`COLLOCATION`需要先安装`jieba`库).
