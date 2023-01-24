@@ -41,9 +41,11 @@ This script is utilized to convert the seq2seq data to operation labels as our F
 ***Usage(使用方式)：***
 
 We provide a kernel method - min_dist_opt(sentence1, sentence2) for converting single instance, while `sentence1` is the original sentence and `sentence2` is the corrected sentence.
+
 我们在脚本中提供了一个核心方法 - min_dist_opt(sentence1, sentence2)来转换单个的实例（错误-修正的句子对），其中`sentence1`是原始句子(带有语病的句子)而`sentence2`则是修改后的正确句子
 
 Examples for the four types of operation (Switch, Delete, Insert and Modify) are demonstrated in the py script.
+
 我们在python脚本中展示了四种操作方法(Switch, Delete, Insert 和 Modify)的例子
 
 Meaning of parameters(可选的参数含义)：
