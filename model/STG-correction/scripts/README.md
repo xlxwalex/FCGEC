@@ -49,7 +49,7 @@ Examples for the four types of operation (Switch, Delete, Insert and Modify) are
 我们在python脚本中展示了四种操作方法(Switch, Delete, Insert 和 Modify)的例子
 
 Meaning of parameters(可选的参数含义)：
-+ ***COLLOCATION*** : (Flag in Line 16) Whether for adapting to collocation searching for Modify operations (是否为Modify操作开启搭配查找模式)
++ ***COLLOCATION*** : (Flag in Line 16) Whether to employ collocation searching for Modify operations (是否为Modify操作开启搭配查找模式)
 
 ***Example for COLLOCATION flag (COLLOCATION开关的例子):***
 
