@@ -67,8 +67,8 @@ class JointDataset(Dataset):
             except:
                 print(sentences[idx])
             lab = pointer.getlabel(offset=False)
-            if max(lab) >= 150:
-                print(sentences[idx])
+            if max(lab) >= self.args.padding_size:
+                print('Sentence length exceeds the limit: {}'.format(sentences[idx]))
                 self.error_ids.append(idx)
                 continue
             wd_idxs = self.tokenizer.convert_tokens_to_ids(tokens)
