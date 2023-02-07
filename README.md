@@ -133,10 +133,17 @@ OUTPUT_PATH=                        # 测试集预测输出.xlsx文件位置
 ***FCGEC: Fine-Grained Corpus for Chinese Grammatical Error Correction***
 ```
 @inproceedings{xu2022fcgec,
-  author = {Lvxiaowei Xu and Jianwang Wu and Jiawei Peng and Jiayu Fu and Ming Cai},
-  title = {FCGEC: Fine-Grained Corpus for Chinese Grammatical Error Correction},
-  booktitle = {Findings of the Association for Computational Linguistics: EMNLP 2022},
-  year = {2022}
+    title = "{FCGEC}: Fine-Grained Corpus for {C}hinese Grammatical Error Correction",
+    author = "Xu, Lvxiaowei  and
+      Wu, Jianwang  and
+      Peng, Jiawei  and
+      Fu, Jiayu  and
+      Cai, Ming",
+    booktitle = "Findings of the Association for Computational Linguistics: EMNLP 2022",
+    year = "2022",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2022.findings-emnlp.137",
+    pages = "1900--1918"
 }
 ```
 <p align="center">
