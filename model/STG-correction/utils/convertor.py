@@ -76,13 +76,15 @@ class Converter(object):
 class PointConverter(Converter):
     """Converter from training target Switch Ops into pointor format."""
 
-    def __init__(self, args, auto : bool = False, **kwargs):
+    def __init__(self, args, auto : bool = False, spmap :bool = False, **kwargs):
         super(PointConverter, self).__init__(args)
         self.point_sequence = []
         self.post_sentence = ""
         self.origin_sentence = ""
         self.use_lm = False
         self.p2next = True
+        self.spmap = spmap
+
         try:
             if args.use_lm: self.use_lm = True
         except: self.use_lm = False
@@ -141,12 +143,48 @@ class PointConverter(Converter):
         assert len(token) == len(post_ops['Switch'])
         return post_sentence, post_ops
 
+    def alignment_spmap(self, token : list, sentence : str, spmap : dict):
+        new_spmap = {}
+        tpidx = 0
+        pos_map = {}
+        sentence = sentence.replace(' ', '')
+        for eidx in range(len(token)):
+            if token[eidx] == '[CLS]' or token[eidx] == '[SEP]':
+                continue
+            if sentence[tpidx] == token[eidx] or token[eidx] == '[UNK]':
+                if token[eidx] == '[UNK]' and sentence[tpidx] not in spmap.values():
+                    spmap[tpidx] = sentence[tpidx]
+                pos_map[tpidx] = eidx
+                tpidx += 1
+            else:
+                tmptoken = token[eidx]
+                if tmptoken.startswith("#"):
+                    tmptoken = token[eidx].replace('#', '')
+                if tmptoken == sentence[tpidx] or tmptoken == '[UNK]':
+                    pos_map[tpidx] = eidx
+                    tpidx += 1
+                else:
+                    tlen = len(tmptoken)
+                    for cidx in range(tlen):
+                        if tmptoken[cidx] == sentence[tpidx + cidx]:
+                            pos_map[tpidx + cidx] = eidx
+                        else:
+                            raise Exception("The sample can not be convert to token case.")
+                    tpidx += tlen
+        for trans in spmap:
+            if pos_map[trans] not in new_spmap: new_spmap[pos_map[trans]] = spmap[trans]
+            else: new_spmap[pos_map[trans]] += spmap[trans]
+        return new_spmap
+
     def convert_point(self, sentence : str, ops : dict, **kwargs):
+        if self.spmap: sentence, specials = sentence
+        else: specials = None
         self.origins = list(range(len(sentence)))
         if 'Switch' not in ops.keys():
             if self.use_lm:
                 self.point_sequence.append(Point(0, '[CLS]'))
                 if 'token' in kwargs.keys():
+                    if specials: self.spmap = self.alignment_spmap(kwargs['token'], sentence, specials)
                     sentence = kwargs['token']
                 self.origins = list(range(len(sentence)))
                 self.point_sequence += [Point(ele+1, sentence[ele]) for ele in self.origins]

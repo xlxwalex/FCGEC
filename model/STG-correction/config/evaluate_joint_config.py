@@ -13,16 +13,16 @@ def parse_args():
     base_args.add_arg('checkpoints', str, 'checkpoints/', 'Checkpoint Path Dir')
     base_args.add_arg('checkp', str, 'joint_model/', 'Checkpoint Sub Dir)')
 
-    base_args.add_arg('export', str, 'stg_joint_test.csv', 'Export file name')
+    base_args.add_arg('export', str, 'stg_joint_test.xlsx', 'Export file name')
 
     # Dataset Params
     data_args = ArgumentGroup(parser, 'dataset', 'Dataset Settings')
-    data_args.add_arg('data_base_dir', str, 'dataset/', 'Base Dir Of Dataset')
+    data_args.add_arg('data_base_dir', str, 'dataset/stg_joint/', 'Base Dir Of Dataset')
 
     # Pretrained Model Params
     pretrained_args = ArgumentGroup(parser, 'pretrained', 'Pretrained Model Settings')
     pretrained_args.add_arg('use_lm', bool, True, 'Whether Model Use Language Models')
-    pretrained_args.add_arg('lm_path', str, '../pretrained_models/roberta-base-chinese/', 'Bert Pretrained Model Path')
+    pretrained_args.add_arg('lm_path', str, '/datadisk2/xlxw/Resources/pretrained_models/roberta-base-chinese', 'Bert Pretrained Model Path')
     pretrained_args.add_arg('lm_hidden_size', int, 768, 'HiddenSize of PLM')
     pretrained_args.add_arg('output_hidden_states', bool, True, 'Output PLM Hidden States')
     pretrained_args.add_arg('finetune', bool, True, 'Finetune Or Freeze')
@@ -30,6 +30,7 @@ def parse_args():
     # Convertor Params
     convertor_args = ArgumentGroup(parser, 'convertor', 'Convertor Settings')
     convertor_args.add_arg('p2next', bool, True, 'Convert Base Point Labels To Next version')
+    convertor_args.add_arg('sp_map', bool, False, 'Map special characters (e.g., alphabets, punctuations).')
 
     # Search Params
     search_params = ArgumentGroup(parser, 'search', 'Search Settings')

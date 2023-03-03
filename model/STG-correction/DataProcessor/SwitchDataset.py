@@ -17,6 +17,8 @@ class SwitchDataset(Dataset):
         self.tokenizer     = BertTokenizer.from_pretrained(args.lm_path, cache_dir='./.cache')
         self.padding_size  = args.padding_size
         self.desc = desc
+        if hasattr(args, 'sp_map') and args.sp_map: self.spmap = True
+        else: self.spmap = False
         # DATA PROCESSER
         self.error_number  = 0
         self.sentences, self.label   = self._read_csv(path)
@@ -58,17 +60,19 @@ class SwitchDataset(Dataset):
         '''
         point_seqs, wd_collect, post_labels, token_collection = [], [], [], []
         for idx in tqdm(range(len(sentences)), desc='Processing ' + self.desc + ' Dataset'):
-            token = self.tokenizer.tokenize(TextWash.punc_wash(sentences[idx]))
+            token = self.tokenizer.tokenize(TextWash.punc_wash(sentences[idx]) if not self.spmap else TextWash.punc_wash_res(sentences[idx])[0])
             kwargs = {
-                'sentence' : TextWash.punc_wash(sentences[idx]),
+                'sentence' : TextWash.punc_wash(sentences[idx]) if not self.spmap else TextWash.punc_wash_res(sentences[idx]),
                 'ops' : labels[idx],
                 'token' : token
             }
             tokens = [self.CLS] + token + [self.SEP]
             try:
-                pointer = PointConverter(self.args, auto=True, **kwargs)
+                pointer = PointConverter(self.args, auto=True, spmap=self.spmap, **kwargs)
                 wd_idxs = self.tokenizer.convert_tokens_to_ids(tokens)
             except:
+                import traceback
+                print(traceback.print_exc())
                 self.error_number += 1
                 print(sentences[idx])
                 continue

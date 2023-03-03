@@ -103,7 +103,7 @@ def evaluate(args):
     print('Construct Generator Data')
     params = torch.load(os.path.join(args.checkpoints, args.checkp_gen, 'checkpoint.pt'))['model']
     tag_construct = (pred_tagger, pred_comb)
-    tag_tokens, mlm_tgt_masks = reconstruct_tagger(np.array(tagger_tokens), tag_construct)
+    tag_tokens, mlm_tgt_masks, _ = reconstruct_tagger(np.array(tagger_tokens), tag_construct)
     tag_gts_tokens, _ = reconstruct_tagger(padding(switch_gts, args.padding_size, args.padding_val),  tag_construct_gts)
     generator_test = GeneratorDataset(args, test_dir, 'test', tag_tokens, mlm_tgt_masks)
     TestLoader = DataLoader(generator_test, batch_size=args.batch_size, shuffle=False, drop_last=False, collate_fn=collate_fn_base)

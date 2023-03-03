@@ -19,7 +19,8 @@ CUDA_ID=1
 SEED=2022
 EPOCH=50
 BATCH_SIZE=32
-MAX_GENERATE=6 # MAX T
+MAX_GENERATE=5 # MAX T
+SPECIAL_MAPPING=false # More details can be found in ISSUE 10
 CHECKPOINT_DIR=checkpoints
 # Roberta-base-chinese can be downloaded at https://github.com/ymcui/Chinese-BERT-wwm
 PLM_PATH=/datadisk2/xlxw/Resources/pretrained_models/roberta-base-chinese/ # pretrained-model path
@@ -37,7 +38,7 @@ python preprocess_data.py --mode normal --err_only True \
 --train_file ${DATA_TRAIN_FILE} --valid_file ${DATA_VALID_FILE} --test_file ${DATA_TEST_FILE}
 
 # STEP 2 - TRAIN STG-Joint MODEL
-JOINT_CHECK_DIR=joint_model
+JOINT_CHECK_DIR=1021_jointmodel_stg
 python joint_stg.py --mode train \
 --gpu_id ${CUDA_ID} \
 --seed ${SEED} \
@@ -49,11 +50,12 @@ python joint_stg.py --mode train \
 --epoch ${EPOCH} \
 --max_generate ${MAX_GENERATE}
 
-# STEP 3 - EVALUATE STG-Joint MODEL
+# STEP 3 - TRAIN STG-Joint MODEL
 python joint_evaluate.py --mode test --gpu_id ${CUDA_ID} --seed ${SEED} \
 --checkpoints ${CHECKPOINT_DIR} --checkp ${JOINT_CHECK_DIR}  \
 --export ${OUTPUT_PATH} \
 --data_base_dir ${DATA_BASE_DIR}/${DATA_OUT_DIR} \
 --max_generate ${MAX_GENERATE} \
 --lm_path ${PLM_PATH} \
---batch_size ${BATCH_SIZE}
+--batch_size ${BATCH_SIZE} \
+--sp_map ${SPECIAL_MAPPING}

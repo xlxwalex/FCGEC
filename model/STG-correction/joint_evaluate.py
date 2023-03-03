@@ -11,9 +11,9 @@ from DataProcessor import TaggerDataset as TaggerDataset, SwitchDataset, Generat
 from utils.collate import collate_fn_base as collate_fn_base, collate_fn_tagger_V2 as collate_fn_tagger
 from utils import get_device, TAGGER_MAP, report_pipeline_output
 from Model import  JointModel
-from utils import padding, attention_mask, SwitchSearch
+from utils import padding, attention_mask, SwitchSearch, convert_spmap_tg, convert_spmap_sw
 from tqdm import tqdm
-from utils import reconstruct_tagger_V2 as reconstruct_tagger, fillin_tokens, extract_generate_tokens
+from utils import reconstruct_tagger_V2 as reconstruct_tagger, fillin_tokens, convert_spmap2tokens
 import numpy as np
 import scipy.io as sio
 
@@ -68,6 +68,12 @@ def evaluate(args):
     switch_tokens = _apply_switch_operator(tokens_ls, pred_label)
     switch_gts    = _apply_switch_operator(tokens_ls, truth_label)
 
+    # Special map
+    if hasattr(args, 'sp_map') and args.sp_map:
+        sp_maps = [pt.spmap for pt in switch_test.point_seq]
+        sw_spmaps = convert_spmap_sw(sp_maps, pred_label)
+    else: sw_spmaps = None
+
     print('Construct Tagger Data')
     tagger_test = TaggerDataset(args, test_dir, 'test', switch_tokens)
     TestLoader = DataLoader(tagger_test, batch_size=args.batch_size, shuffle=False, drop_last=False, collate_fn=collate_fn_tagger)
@@ -94,10 +100,16 @@ def evaluate(args):
 
     print('Construct Generator Data')
     tag_construct = (pred_tagger, pred_comb)
-    tag_tokens, mlm_tgt_masks = reconstruct_tagger(np.array(tagger_tokens), tag_construct)
-    tag_gts_tokens, _ = reconstruct_tagger(padding(switch_gts, args.padding_size, args.padding_val),  tag_construct_gts)  # EM
+    tag_tokens, mlm_tgt_masks, tg_mapper = reconstruct_tagger(np.array(tagger_tokens), tag_construct)
+    tag_gts_tokens, _, _ = reconstruct_tagger(padding(switch_gts, args.padding_size, args.padding_val),  tag_construct_gts)  # EM
     generator_test = GeneratorDataset(args, test_dir, 'test', tag_tokens, mlm_tgt_masks)
     TestLoader = DataLoader(generator_test, batch_size=args.batch_size, shuffle=False, drop_last=False, collate_fn=collate_fn_base)
+
+    # Special map
+    if hasattr(args, 'sp_map') and args.sp_map:
+        tg_spmaps = convert_spmap_tg(sw_spmaps, tg_mapper)
+    else:
+        tg_spmaps = None
 
     pred_mlm, truth_mlm, met_masks = [], [], []
     for step, batch_data in enumerate(tqdm(TestLoader, desc='Processing Generator')):
@@ -120,9 +132,12 @@ def evaluate(args):
 
     print('>>> Start to constrcut final output')
     outputs = fillin_tokens(tag_tokens, mlm_tgt_masks, pred_mlm)
-    switch_tokens = [''.join(switch_test.tokenizer.convert_ids_to_tokens(ele[1:-1])).replace('##', '').replace('[UNK]', '"').replace('[PAD]', '') for ele in switch_tokens]
-    tagger_tokens = [''.join(tagger_test.tokenizer.convert_ids_to_tokens(ele[1:-1])).replace('##', '').replace('[UNK]', '"').replace('[PAD]', '') for ele in tag_tokens]
-    generate_tokens = [''.join(generator_test.tokenizer.convert_ids_to_tokens(ele[1:-1])).replace('##', '').replace('[UNK]', '"').replace('[PAD]', '') for ele in outputs]
+    switch_tokens = [''.join(convert_spmap2tokens(switch_test.tokenizer.convert_ids_to_tokens(ele[1:-1]), sw_spmaps[i])).replace('##', '').replace('[PAD]', '').replace('[UNK]', '') for i, ele in enumerate(switch_tokens)] \
+        if hasattr(args, 'sp_map') and args.sp_map else  [''.join(switch_test.tokenizer.convert_ids_to_tokens(ele[1:-1])).replace('##', '').replace('[UNK]', '"').replace('[PAD]', '') for ele in switch_tokens]
+    tagger_tokens = [''.join(convert_spmap2tokens(switch_test.tokenizer.convert_ids_to_tokens(ele[1:-1]), tg_spmaps[i])).replace('##', '').replace('[PAD]', '').replace('[UNK]', '') for i, ele in enumerate(tag_tokens)] \
+        if hasattr(args, 'sp_map') and  args.sp_map else [''.join(tagger_test.tokenizer.convert_ids_to_tokens(ele[1:-1])).replace('##', '').replace('[UNK]', '"').replace('[PAD]', '') for ele in tag_tokens]
+    generate_tokens = [''.join(convert_spmap2tokens(switch_test.tokenizer.convert_ids_to_tokens(ele[1:-1]), tg_spmaps[i])).replace('##', '').replace('[PAD]', '').replace('[UNK]', '') for i, ele in enumerate(outputs)] \
+        if hasattr(args, 'sp_map') and  args.sp_map else [''.join(generator_test.tokenizer.convert_ids_to_tokens(ele[1:-1])).replace('##', '').replace('[UNK]', '"').replace('[PAD]', '') for ele in outputs]
     report_pipeline_output(os.path.join(args.data_base_dir, args.export), switch_test.sentences, switch_test.label, switch_tokens, tagger_tokens, generate_tokens, uuid=uuid)
     print('Final output saved at %s' % os.path.join(args.data_base_dir, args.export))
 

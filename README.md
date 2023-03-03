@@ -94,6 +94,7 @@ SEED=                               # 随机数种子
 EPOCH=     
 BATCH_SIZE=  
 MAX_GENERATE=                       # MAX T (最大生成字符数，一般设为6即可，若使用下方checkpoint[版本221021]请设为5)
+SPECIAL_MAPPING=                    # 是否对标点/英文等做映射，更多信息请见ISSUE #10 (为了与论文中结果一致，默认不开启)
 CHECKPOINT_DIR=checkpoints
 PLM_PATH=                           # 预训练模型路径
 OUTPUT_PATH=                        # 测试集预测输出.xlsx文件位置
@@ -103,6 +104,7 @@ OUTPUT_PATH=                        # 测试集预测输出.xlsx文件位置
 + (2022/11/29) 根据`GMago123`的反馈([ISSUE#3](https://github.com/xlxwalex/FCGEC/issues/3)) ，为了便于提交评测，我们在Joint的输出XLSX文件中加入了对应的UID字段
 + (2022/12/06) 根据`谭*环`(邮件)的建议，为了方便对比Seq2Seq类型的模型，我们提供了可将FCGEC数据的编辑操作转换为序列到序列数据的脚本[convert_fcgec_to_seq2seq.py](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/scripts/convert_fcgec_to_seq2seq.py) ，使用方式请见[`scripts`](https://github.com/xlxwalex/FCGEC/tree/main/model/STG-correction/scripts) 下的README文件 
 + (2023/01/25) 根据`Candice52`的反馈([ISSUE#7](https://github.com/xlxwalex/FCGEC/issues/7))，我们提供了将其他Seq2Seq格式的数据转换为本工作中的操作格式的脚本(论文中的Algorithm 1代码) [convert_seq2seq_to_operation.py](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/scripts/convert_seq2seq_to_operation.py) ，使用方式请见[`scripts`](https://github.com/xlxwalex/FCGEC/tree/main/model/STG-correction/scripts) 下的README文件 
++ (2023/03/03) 根据`Helenailse1`的建议([ISSUE#10](https://github.com/xlxwalex/FCGEC/issues/10)))，我们新增了对标点、字母等非中文符号的映射
 
 ### 模型参数文件
 我们提供在FCGEC语料上训练好的模型checkpoint文件，以方便大家使用测试：

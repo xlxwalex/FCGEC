@@ -99,6 +99,7 @@ SEED=                               # Random seed
 EPOCH=     
 BATCH_SIZE=  
 MAX_GENERATE=                       # MAX T (Maximum number of characters generated, default set to 6)
+SPECIAL_MAPPING=                    # Whether to process special characters (e.g., punctuations, alphabets), more details are shown in ISSUE #10 (default set to false)
 CHECKPOINT_DIR=checkpoints
 PLM_PATH=                           # Pre-trained model path
 OUTPUT_PATH=                        # Prediction output of .xlsx file for STG model
