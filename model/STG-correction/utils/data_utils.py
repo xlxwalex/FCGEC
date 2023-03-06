@@ -436,8 +436,6 @@ def convert_spmap_tg(sp_map : list, tg_mapper : list) -> list:
     return new_spmap
 
 def convert_spmap2tokens(tokens : list, sp_maps : dict):
-    if 'led' in tokens:
-        print()
     if not sp_maps: return tokens
     for i,x in enumerate(tokens):
         if i in sp_maps: tokens[i] = sp_maps[i]

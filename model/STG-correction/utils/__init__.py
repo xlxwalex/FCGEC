@@ -16,6 +16,7 @@ from utils.export import export_generator
 from utils.data_utils import data_filter, reconstruct_switch, reconstruct_tagger, joint_report, map_unk2word, reconstruct_tagger_V2, fillin_tokens, report_pipeline_output, extract_generate_tokens, fillin_tokens4gts
 from utils.data_utils import output_type_report
 from utils.convertor import PointConverter, TaggerConverter
+from utils.data_utils import obtain_uuid, convert_spmap_sw, convert_spmap2tokens, convert_spmap_tg
 
 AttnMask = SelfAttentionMask()
 
@@ -26,4 +27,4 @@ __all__ = ["get_device", "attention_mask", "padding", "norm_logits", "softmax_lo
            "tagger2generator", "export_generator", "fillin_tokens", "report_pipeline_output", "extract_generate_tokens", "fillin_tokens4gts",
            "data_filter", "reconstruct_switch", "reconstruct_tagger", "joint_report", "map_unk2word", "reconstruct_tagger_V2",
            "TaggerMetricV2",
-           "output_type_report"]
+           "output_type_report", "obtain_uuid", "convert_spmap_sw", "convert_spmap2tokens", "convert_spmap_tg"]
