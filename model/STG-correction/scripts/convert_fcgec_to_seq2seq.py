@@ -119,7 +119,7 @@ def train_valid_processor(out_path : str, dataset : dict, uuid : bool=True, out_
         outs.append(dataset[datk]['sentence'])
         if out_flag: outs.append(dataset[datk]['error_flag'])
         if out_type: outs.append(dataset[datk]['error_type'])
-        post_sentences = convert_operator2seq(dataset[datk]['sentence'], json.loads(dataset[datk]['operation'])) if dataset[datk]['error_flag'] == 1 else dataset[datk]['sentence']
+        post_sentences = convert_operator2seq(dataset[datk]['sentence'], json.loads(dataset[datk]['operation'])) if dataset[datk]['error_flag'] == 1 else [dataset[datk]['sentence']]
         outs.append('\t'.join(post_sentences))
         out_data.append(outs)
 
