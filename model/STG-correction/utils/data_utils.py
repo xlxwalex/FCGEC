@@ -425,8 +425,6 @@ def convert_spmap_sw(sp_map : list, sw_labels : np.array) -> list:
 def convert_spmap_tg(sp_map : list, tg_mapper : list) -> list:
     new_spmap = []
     for idx in range(len(sp_map)):
-        if idx == 163:
-            print()
         spmapper = sp_map[idx]
         tgmapper = tg_mapper[idx]
         mapper = {}
