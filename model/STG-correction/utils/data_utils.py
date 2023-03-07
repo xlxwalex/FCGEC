@@ -157,7 +157,7 @@ def reconstruct_tagger_V2(tag_tokens : np.array, tag_preds : tuple, return_flag 
                 mapper[cidx] = curidx
             elif tag_cur[cidx] in [TAGGER_MAP[DELETE_TAG], TAGGER_MAP[MODIFY_DELETE_TAG]]:
                 flag = True
-                mapper[cidx] = -1
+                mapper[cidx] = curidx
                 continue
             elif tag_cur[cidx] == TAGGER_MAP[INSERT_TAG]:
                 flag = True
@@ -425,8 +425,6 @@ def convert_spmap_sw(sp_map : list, sw_labels : np.array) -> list:
 def convert_spmap_tg(sp_map : list, tg_mapper : list) -> list:
     new_spmap = []
     for idx in range(len(sp_map)):
-        if idx == 163:
-            print()
         spmapper = sp_map[idx]
         tgmapper = tg_mapper[idx]
         mapper = {}
