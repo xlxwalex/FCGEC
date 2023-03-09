@@ -162,30 +162,35 @@ def reconstruct_tagger_V2(tag_tokens : np.array, tag_preds : tuple, return_flag 
             elif tag_cur[cidx] == TAGGER_MAP[INSERT_TAG]:
                 flag = True
                 insert_num = insmod_cur[cidx]
-                if (insert_num < 1): continue
+                curidx += 1
+                if (insert_num < 1):
+                    mapper[cidx] = curidx
+                    continue
                 post_token.append(token_cur[cidx])
                 mlm_mask.append(0)
                 post_token.extend([MASK_LM_ID] * insert_num)
                 mlm_mask.extend([1] * insert_num)
-                curidx += 1
-                mapper[cidx] = curidx
                 curidx += insert_num
+                mapper[cidx] = curidx
             elif tag_cur[cidx] == TAGGER_MAP[MOIFY_ONLY_TAG]:
                 flag = True
                 mlm_mask.append(1)
                 post_token.append(MASK_LM_ID)
                 curidx += 1
-                mapper[cidx] = -1
+                mapper[cidx] = curidx
             elif tag_cur[cidx] == TAGGER_MAP[MODIFY_TAG]:
                 flag = True
                 modify_num = insmod_cur[cidx]
                 post_token.append(MASK_LM_ID)
                 mlm_mask.append(1)
-                if (modify_num < 1): continue
+                curidx += 1
+                if (modify_num < 1):
+                    mapper[cidx] = curidx
+                    continue
                 post_token.extend([MASK_LM_ID] * modify_num)
                 mlm_mask.extend([1] * modify_num)
-                mapper[cidx] = -1
-                curidx += (modify_num + 1)
+                curidx += (modify_num)
+                mapper[cidx] = curidx
         post_tokens.append(post_token)
         mlm_tgt_masks.append(mlm_mask)
         op_flag.append(flag)
