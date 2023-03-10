@@ -56,7 +56,7 @@ Our corpus has three types of labels corresponding to the three tasks for error 
     5. Structure Confusion (SC)
     6. Illogical (ILL)
     7. Ambiguity (AM)
-+ ***Error correction:*** Given a sentence, the model outputs the corresponding sentence without grammatical errors。
++ ***Error correction:*** Given a sentence, the model outputs the corresponding sentence without grammatical errors
 
 For more detailed information about the above tasks and examples, please refer to our paper.
 
@@ -108,7 +108,7 @@ OUTPUT_PATH=                        # Prediction output of .xlsx file for STG mo
 + (2022/11/29) Add `uuid` column to the output xlsx file of [`run_stg_joint.sh`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/run_stg_tti.sh).
 + (2022/12/06) Add a script file [convert_fcgec_to_seq2seq.py](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/scripts/convert_fcgec_to_seq2seq.py) which can convert our FCGEC data to seq2seq format. More details are shown in the README of [`scripts`](https://github.com/xlxwalex/FCGEC/tree/main/model/STG-correction/scripts) folder.
 + (2023/01/25) Add a script file [convert_seq2seq_to_operation.py](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/scripts/convert_seq2seq_to_operation.py) which can convert our seq2seq format data to operation format data. More details are shown in the README of [`scripts`](https://github.com/xlxwalex/FCGEC/tree/main/model/STG-correction/scripts) folder.
-+ (2023/03/03) Add new codes for processing special charaters (e.g., punctuations, alphabets) for [`run_stg_joint.sh`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/run_stg_joint.sh).
++ (2023/03/03) Add new codes for processing special characters (e.g., punctuation, alphabet) for [`run_stg_joint.sh`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/run_stg_joint.sh).
 
 ### Checkpoint File
 We provide checkpoint files of our STG trained on the FCGEC corpus to facilitate testing:
