@@ -77,7 +77,7 @@ FCGEC的训练、验证及测试数据都已放在[`data`](https://github.com/xl
 在STG模型的基础上，我们发现由于错误类型与我们设计的几种操作关系有很大的相关性，因此检错任务可以通过将错误类型判断作为辅助任务来提升纠错的性能，也就是论文中的(+TTI)。更多关于模型的信息可以参考我们的论文。
 
 ### 实验环境搭建
-我们采用Python=3.8.5作为基本环境，您可以用通过以下代码来创建环境以及安装依赖：
+我们采用Python=3.8.5作为基本环境，您可以通过以下代码来创建环境以及安装依赖：
 ```shell
 conda create -n stg_env python=3.8.5
 source activate stg_env
@@ -114,6 +114,8 @@ OUTPUT_PATH=                        # 测试集预测输出.xlsx文件位置
 | **FCGEC-Joint** | [`RoBERTa-Base-Chinese`](https://huggingface.co/hfl/chinese-roberta-wwm-ext) | 34.10 / 45.48 | [FCGEC_checkpoints.pt](https://expic.xlxw.org/fcgec/checkpoints.pt) | `221021`
 
 ***使用方式：*** 您可以将该checkpoint文件放到[`model/STG-correction/checkpoints`](https://github.com/xlxwalex/FCGEC/tree/main/model/STG-correction/checkpoints) 文件夹中，之后使用[`joint_evaluate.py`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/joint_evaluate.py) 文件来得到测试集的预测结果，具体使用方式可以参考[`run_stg_joint.sh`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/run_stg_joint.sh) 的 `STEP 3`部分 (***注意***：如果您使用该checkpoint，请将`MAX_GENERATE`设置为5进行使用，具体请见 [ISSUE#3](https://github.com/xlxwalex/FCGEC/issues/3) ，感谢`GMago123`的反馈)。
+
+***下载常见问题***： 如果点击checkpoint文件链接出现403提示，您可以刷新一下网页 或 复制链接并开启一个浏览器新空白页来访问链接，这两种方式一般都可以触发浏览器的下载操作。如果都不行的话您也可以复制checkpoint文件链接到下载器中进行下载。若以上方式都无法解决，欢迎在Issue中进行反馈。
 
 ## 模型性能评测
 对于***错误检测*** 以及***错误类型检测*** 两个任务，我们采用`Accuracy`, `Precision`, `Recall` 以及 `Macro F1 score` 作为衡量模型性能的依据。
