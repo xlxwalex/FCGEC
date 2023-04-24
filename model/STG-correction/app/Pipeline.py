@@ -92,15 +92,16 @@ class Pipeline(object):
         return results_token, modified_sentences
 
     def details_generate(sself, sentences : list, binary_reports : list = None, operate_reports : list = None) -> list:
-        detail_text = []
+        detail_text, global_idx = [], 1
         assert  operate_reports is not None
         for index in range(len(sentences)):
             rt = RichText()
             if operate_reports[index][0] == '该句子没有语病': rt.add(operate_reports[index][0])
             else:
                 op_str = ''
-                for opidx in range(len(operate_reports[index])):op_str += ('[{}] {}\n'.format(opidx + 1, operate_reports[index][opidx]))
+                for opidx in range(len(operate_reports[index])):op_str += ('[{}] {}\n'.format(global_idx, operate_reports[index][opidx]))
                 rt.add(op_str, color=TEXT_COLOR)
+                global_idx += 1
             detail_text.append(rt)
         return detail_text
 
