@@ -138,6 +138,20 @@ def reconstruct_tagger(tag_tokens : np.array, tag_preds : tuple) -> tuple:
         mlm_tgt_masks.append(mlm_mask)
     return post_tokens, mlm_tgt_masks
 
+def _apply_switch_operator(wd_idxs: list, switch_ops: list) -> list:
+    res = []
+    for lidx in range(len(wd_idxs)):
+        post_token = [101]
+        switch_pred = switch_ops[lidx]
+        sw_pidx = switch_pred[0]
+        wd_idx = wd_idxs[lidx]
+        while sw_pidx not in [0, -1]:
+            post_token.append(wd_idx[sw_pidx])
+            sw_pidx = switch_pred[sw_pidx]
+            if wd_idx[sw_pidx] == 102: switch_pred[sw_pidx] = 0
+        res.append(post_token)
+    return res
+
 def reconstruct_tagger_V2(tag_tokens : np.array, tag_preds : tuple, return_flag : bool = False) -> tuple:
     post_tokens, mlm_tgt_masks, op_flag, sp_mapper = [], [], [], []
     tagger, insmod = tag_preds
@@ -236,8 +250,6 @@ def fillin_tokens4gts(generator_tokens, mlm_tgts):
                 token.append(tokens[idx])
         data_out.append(token)
     return data_out
-
-
 
 def fillin_tokens(generator_tokens, mlm_masks, mlm_tgts):
     size = len(generator_tokens)

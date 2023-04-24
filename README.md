@@ -114,6 +114,7 @@ OUTPUT_PATH=                        # 测试集预测输出.xlsx文件位置
     <br>
   </p>
   </details>
++ (2023/04/25) 根据`yuan-cherish`的建议([ISSUE#15](https://github.com/xlxwalex/FCGEC/issues/15))，我们新增了单句推理改错的脚本[inference_singleline.py](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/inference_singleline.py)，运行后直接输入错误句子，会返回修改后的句子(输入`q`退出)
 
 ### 模型参数文件
 我们提供在FCGEC语料上训练好的模型checkpoint文件，以方便大家使用测试：
