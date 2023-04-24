@@ -41,7 +41,7 @@ def parse_args():
     model_args = ArgumentGroup(parser, 'model', 'Model Settings')
     model_args.add_arg('num_classes', int, 2, 'Number of CGEC classes')
     model_args.add_arg('tagger_classes', int, 6, 'Number of Tagger Classes')
-    model_args.add_arg('max_generate', int, 6, 'Number of Max Token Generation')
+    model_args.add_arg('max_generate', int, 7, 'Number of Max Token Generation')
     model_args.add_arg('padding_size', int, 150, 'Padding Size Of Beet Model')
     model_args.add_arg('padding_val', int, 0, 'Padding Value Of LM Model')
     model_args.add_arg('ignore_val', int, -1, 'Padding Value Of ignore (Generator) index')

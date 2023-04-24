@@ -24,3 +24,12 @@ MASK_LM_ID = 103
 TYPE_MAP = {'IWO' : 0, 'IWC' : 1, 'SC' : 2, 'ILL' : 3, 'CM' : 4, 'CR' : 5, 'AM' :6}
 TYPE_MAP_INV = ['语序不当', '搭配不当', '结构混乱', '不合逻辑', '成分残缺', '成分赘余', '表意不明']
 TYPE_MAP_INV_NEW =  {'语序不当' : 'IWO', '搭配不当' : 'IWC', '结构混乱' :'SC', '不合逻辑' : 'ILL', '成分残缺' : 'CM', '成分赘余' : 'CR', '表意不明' : 'AM'}
+
+# Pipeline
+TEMPLATE_FILE_NAME = 'app/template/fcgec-template-v2.0.docx'
+CACHE_DIR = 'app/cache'
+SPLIT_VOCAB = ['？', '！', '。', '\n', '；', '?', '!', ';']
+INNER_VOCAB = ['，', '：', '"', '、', ',', ':', '”']
+BINARY_COLOR = 'C71585'
+UNDER_COLOR  = 'DC143C'
+TEXT_COLOR   = '000000'
