@@ -110,7 +110,7 @@ OUTPUT_PATH=                        # 测试集预测输出.xlsx文件位置
   <summary>展开查看截图</summary>
   <p align="center">
     <br>
-    <img src="./figure/demo.jpg" width="400"/>
+    <img src="./figure/demo.jpg" width="550"/>
     <br>
   </p>
   </details>
