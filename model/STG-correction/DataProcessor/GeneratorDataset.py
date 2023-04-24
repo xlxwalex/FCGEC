@@ -58,7 +58,7 @@ class GeneratorDataset(Dataset):
 
     def _extract_gendata(self, sentences : list, labels : list) -> tuple:
         '''
-        Extract Data that Contains I / MI / M
+        Extract Data that Contains I / MI
         :param sentences: sentences collection list
         :param labels: labels list
         :return: extracted sentence, label
@@ -72,11 +72,11 @@ class GeneratorDataset(Dataset):
                 except:
                     print(sentence)
             if 'Insert' in label or 'Modify' in label:
-                if 'Modify' in label:
-                    mod_op = label['Modify']
-                    MI_flags = [True if 'INS' in mod['tag'] or '+' not in mod['tag'] else False for mod in mod_op]
-                    if True not in MI_flags:
-                        continue
+                # if 'Modify' in label:
+                #     mod_op = label['Modify']
+                #     MI_flags = [True if 'INS' in mod['tag'] else False for mod in mod_op]
+                #     if True not in MI_flags:
+                #         continue
                 post_sentences.append(sentence)
                 post_labels.append(label)
             else:
