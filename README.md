@@ -106,7 +106,7 @@ OUTPUT_PATH=                        # 测试集预测输出.xlsx文件位置
 + (2023/01/25) 根据`Candice52`的反馈([ISSUE#7](https://github.com/xlxwalex/FCGEC/issues/7))，我们提供了将其他Seq2Seq格式的数据转换为本工作中的操作格式的脚本(论文中的Algorithm 1代码) [convert_seq2seq_to_operation.py](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/scripts/convert_seq2seq_to_operation.py) ，使用方式请见[`scripts`](https://github.com/xlxwalex/FCGEC/tree/main/model/STG-correction/scripts) 下的README文件 
 + (2023/03/03) 根据`Helenailse1`的建议([ISSUE#10](https://github.com/xlxwalex/FCGEC/issues/10))，我们新增了对标点、字母等非中文符号的映射
 + (2023/04/24) 增加新特性`Reporter`，程序可以导出病句报告，详细信息请见[`app`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/app)下的README文件以及[ISSUE#15](https://github.com/xlxwalex/FCGEC/issues/15)，DEMO使用代码见[`demo_pipeline.py`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/demo_pipeline.py)，[DEMO报告](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/dataset/demo/demo-v1.0.pdf)截图如下所示：
-  <details>
+  <details>[README_EN.md](README_EN.md)
   <summary>展开查看截图</summary>
   <p align="center">
     <br>
@@ -115,6 +115,7 @@ OUTPUT_PATH=                        # 测试集预测输出.xlsx文件位置
   </p>
   </details>
 + (2023/04/25) 根据`yuan-cherish`的建议([ISSUE#15](https://github.com/xlxwalex/FCGEC/issues/15))，我们新增了单句推理改错的脚本[inference_singleline.py](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/inference_singleline.py)，运行后直接输入错误句子，会返回修改后的句子(输入`q`退出)
++ (2023/04/25) 根据`Lj4040`的反馈([ISSUE#11](https://github.com/xlxwalex/FCGEC/issues/11))，我们修复了JointLoss中生成器可能损失为NaN的问题以及Indep模式下Generator过滤掉了有效样本的问题（可能会提升Indep模型的表现)
 
 ### 模型参数文件
 我们提供在FCGEC语料上训练好的模型checkpoint文件，以方便大家使用测试：

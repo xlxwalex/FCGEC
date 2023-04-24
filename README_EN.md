@@ -109,6 +109,17 @@ OUTPUT_PATH=                        # Prediction output of .xlsx file for STG mo
 + (2022/12/06) Add a script file [convert_fcgec_to_seq2seq.py](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/scripts/convert_fcgec_to_seq2seq.py) which can convert our FCGEC data to seq2seq format. More details are shown in the README of [`scripts`](https://github.com/xlxwalex/FCGEC/tree/main/model/STG-correction/scripts) folder.
 + (2023/01/25) Add a script file [convert_seq2seq_to_operation.py](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/scripts/convert_seq2seq_to_operation.py) which can convert our seq2seq format data to operation format data. More details are shown in the README of [`scripts`](https://github.com/xlxwalex/FCGEC/tree/main/model/STG-correction/scripts) folder.
 + (2023/03/03) Add new codes for processing special characters (e.g., punctuation, alphabet) for [`run_stg_joint.sh`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/run_stg_joint.sh).
++ (2023/04/24) Add new feature `Reporter` which can generate detailed report for document-level error correction task. More details can be found in README file of [`app`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/app) folder and [ISSUE#15](https://github.com/xlxwalex/FCGEC/issues/15). We provide a demo script in [`demo_pipeline.py`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/demo_pipeline.py). Besides, the screenshot of [demo report](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/dataset/demo/demo-v1.0.pdf) is:
+  <details>
+  <summary>Expand to view screenshot</summary>
+  <p align="center">
+    <br>
+    <img src="./figure/demo-v2.jpg" width="550"/>
+    <br>
+  </p>
+  </details>
++ (2023/04/25) Add a new script file [inference_singleline.py](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/inference_singleline.py) under minimized inference code for single sentence correction.
++ (2023/04/25) Fixed the bug where loss can be NaN in JointLoss and the problem with Generator module in Indep mode.
 
 ### Checkpoint File
 We provide checkpoint files of our STG trained on the FCGEC corpus to facilitate testing:
