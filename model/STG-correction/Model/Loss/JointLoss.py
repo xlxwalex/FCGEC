@@ -75,7 +75,9 @@ class JointLoss(nn.Module):
         output_mlm = self.softmax(mlm_logits)
         loss_mlm = self.nll_loss(output_mlm, mlm_tgts)
         # Gather Loss
-        total_loss = binary_loss + type_loss + pointer_loss + tagger_loss +loss_mlm
+        total_loss = binary_loss + type_loss + pointer_loss + tagger_loss
+        if not torch.isnan(loss_mlm): total_loss = total_loss + loss_mlm
+        else: loss_mlm = torch.zeros(loss_mlm.shape, dtype=loss_mlm.dtype, device=loss_mlm.device)
         if need_info:
             loss_info = {
                 'binary'  : binary_loss.item(),
