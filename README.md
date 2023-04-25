@@ -16,7 +16,7 @@
 # FCGEC: Fine-Grained Corpus for Chinese Grammatical Error Correction
 [**中文**](https://github.com/xlxwalex/FCGEC) | [**English**](https://github.com/xlxwalex/FCGEC/blob/main/README_EN.md)
 
-<a name="software">[***程序更新*** (最近2023/04/25)]</a>&nbsp;&nbsp;&nbsp; <a name="data">[***数据更新*** (最近2023/01/25)]]</a> 
+[[***程序更新*** (最近2023/04/25)]](#程序更新信息-a-hrefsoftware-a)&nbsp;&nbsp;&nbsp; <a name="data">[***数据更新*** (最近2023/01/25)]]</a> 
 ## FCGEC介绍
 中文语法检错纠错（Chinese Grammatical Detection & Correction, CGED & CGEC）是指给定一个句子，检纠错系统可以检查句子中是否存在语法错误。如果有语法错误，系统需要对错误的文本进行自动纠错并输出正确的句子。
 该项技术已被用在教育、检索等多个领域。
