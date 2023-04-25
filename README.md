@@ -16,7 +16,7 @@
 # FCGEC: Fine-Grained Corpus for Chinese Grammatical Error Correction
 [**中文**](https://github.com/xlxwalex/FCGEC) | [**English**](https://github.com/xlxwalex/FCGEC/blob/main/README_EN.md)
 
-[[***程序更新*** (最近2023/04/25)]](#程序更新信息-a-hrefsoftware-a)&nbsp;&nbsp;&nbsp; <a name="data">[***数据更新*** (最近2023/01/25)]]</a> 
+[[***程序更新*** (最近2023/04/25)]](#程序更新信息)&nbsp;&nbsp;&nbsp; [[***语料更新*** (最近2023/04/25)]](#语料更新信息)
 ## FCGEC介绍
 中文语法检错纠错（Chinese Grammatical Detection & Correction, CGED & CGEC）是指给定一个句子，检纠错系统可以检查句子中是否存在语法错误。如果有语法错误，系统需要对错误的文本进行自动纠错并输出正确的句子。
 该项技术已被用在教育、检索等多个领域。
@@ -38,7 +38,7 @@
 ### FCGEC语料数据
 FCGEC的训练、验证及测试数据都已放在[`data`](https://github.com/xlxwalex/FCGEC/tree/main/data) 目录下，数据的格式请见 [`data`](https://github.com/xlxwalex/FCGEC/tree/main/data) 下的README文件。注意：测试集我们只给出了句子没有给出对应的标签，您可以通过该[Codalab评测页面](https://codalab.lisn.upsaclay.fr/competitions/8020) 提交您的模型预测结果来计算性能。
 
-### 语料更新信息 <a href="#data"></a>
+### 语料更新信息
 + (2022/12/07 勘误) 感谢`nghuyong`的反馈([ISSUE#6](https://github.com/xlxwalex/FCGEC/issues/6)) ，`FCGEC_train.json`(1023)版本存在问题，该版本为中间过程语料被错误上传(有部分样本存在`error_flag`错误，以及缺少所有的正确句子样本)，目前该文件已重新上传
 + (2023/01/25 更新) 解决了`FCGEC_train.json`(1207)版本中特殊符号、空格可能引起程序报错的问题，并修复了部分Switch操作标签序列重复的问题
 
@@ -101,7 +101,7 @@ PLM_PATH=                           # 预训练模型路径
 OUTPUT_PATH=                        # 测试集预测输出.xlsx文件位置
 ```
 
-### 程序更新信息 <a href="#software"></a>
+### 程序更新信息
 + (2022/11/29) 根据`GMago123`的反馈([ISSUE#3](https://github.com/xlxwalex/FCGEC/issues/3)) ，为了便于提交评测，我们在Joint的输出XLSX文件中加入了对应的UID字段
 + (2022/12/06) 根据`谭*环`(邮件)的建议，为了方便对比Seq2Seq类型的模型，我们提供了可将FCGEC数据的编辑操作转换为序列到序列数据的脚本[convert_fcgec_to_seq2seq.py](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/scripts/convert_fcgec_to_seq2seq.py) ，使用方式请见[`scripts`](https://github.com/xlxwalex/FCGEC/tree/main/model/STG-correction/scripts) 下的README文件 
 + (2023/01/25) 根据`Candice52`的反馈([ISSUE#7](https://github.com/xlxwalex/FCGEC/issues/7))，我们提供了将其他Seq2Seq格式的数据转换为本工作中的操作格式的脚本(论文中的Algorithm 1代码) [convert_seq2seq_to_operation.py](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/scripts/convert_seq2seq_to_operation.py) ，使用方式请见[`scripts`](https://github.com/xlxwalex/FCGEC/tree/main/model/STG-correction/scripts) 下的README文件 
