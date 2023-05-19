@@ -11,6 +11,19 @@ def collate_fn_base(batch):
     else:
         raise Exception('Error Batch Input, Please Check.')
 
+# Collate_fn of DEMO DataLoader
+def collate_fn_demo(batch):
+    dim = len(batch[0].keys())
+    if dim == 2:  # Train DataLoader
+        tokens    = [item['token'] for item in batch]
+        masks = [item['mask'] for item in batch]
+        return (tokens, masks)
+    elif dim == 1: # Test DataLoader
+        tokens    = [item['token'] for item in batch]
+        return (tokens)
+    else:
+        raise Exception('Error Batch Input, Please Check.')
+
 def collate_fn_bertbase_tti(batch):
     dim = len(batch[0].keys())
     if dim == 3:  # Train DataLoader
