@@ -122,7 +122,7 @@ OUTPUT_PATH=                        # 测试集预测输出.xlsx文件位置
   </details>
 + (2023/04/25) 根据`yuan-cherish`的建议([ISSUE#15](https://github.com/xlxwalex/FCGEC/issues/15))，我们新增了单句推理改错的脚本[inference_singleline.py](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/inference_singleline.py)，运行后直接输入错误句子，会返回修改后的句子(输入`q`退出)
 + (2023/04/25) 根据`Lj4040`的反馈([ISSUE#11](https://github.com/xlxwalex/FCGEC/issues/11))，我们修复了JointLoss中生成器可能损失为NaN的问题以及Indep模式下Generator过滤掉了有效样本的问题（可能会提升Indep模型的表现)
-+ (2023/05/29) 根据`dabao12`提到的问题([ISSUE#11](https://github.com/xlxwalex/FCGEC/issues/19))，我们在[shared分支](https://github.com/xlxwalex/FCGEC/tree/shared/model)中将Joint模型修改为了共享编码器的版本
++ (2023/05/29) 根据`dabao12`提到的问题([ISSUE#19](https://github.com/xlxwalex/FCGEC/issues/19))，我们在[shared分支](https://github.com/xlxwalex/FCGEC/tree/shared/model)中将Joint模型修改为了共享编码器的版本
 
 ### 模型参数文件
 我们提供在FCGEC语料上训练好的模型checkpoint文件，以方便大家使用测试：
