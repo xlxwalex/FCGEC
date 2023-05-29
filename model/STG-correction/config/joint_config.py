@@ -35,7 +35,6 @@ def parse_args():
 
     # Model Params
     model_args = ArgumentGroup(parser, 'model', 'Model Settings')
-    model_args.add_arg('model', str, 'modalnet_origin', 'Model Selection, Can Choose [modalnet_origin]')
     model_args.add_arg('num_classes', int, 2, 'Number of CGE classes')
     model_args.add_arg('tagger_classes', int, 6, 'Number of Tagger Classes')
     model_args.add_arg('max_generate', int, 6, 'Number of Max Token Generation')
@@ -46,6 +45,9 @@ def parse_args():
     model_args.add_arg('scale_attn', bool, True, 'Scale Attention Scores for Pointer Network')
     model_args.add_arg('factorized_embedding', bool, False, 'Factorized Embedding Parameterization')
     model_args.add_arg('lm_emb_size', int, 768, 'LM Model Embedding Size')
+    model_args.add_arg('tagger_weight_post', float, 0.01, 'Post weight of Tagger module.')
+    model_args.add_arg('switch_weight', float, 1.2, 'Weight of Switch module.')
+    model_args.add_arg('switch_ref_weight', float, 1.4, 'Weight of Switch module for reference.')
     # |- Layer_Attn
     model_args.add_arg('layers_num', int, 12, 'Number Of Bert Layers')
     model_args.add_arg('layer_init_w', float, 0.1, 'Initial Layer Weights')

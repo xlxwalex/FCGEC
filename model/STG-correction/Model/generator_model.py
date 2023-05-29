@@ -1,9 +1,40 @@
 import torch
-import torch.functional as F
 from torch import nn
 from argparse import Namespace
 from Model.Layer import Linear, LayerNorm, gelu
 from transformers import BertForMaskedLM
+
+class GeneratorModelEncoder(nn.Module):
+    def __init__(self, args : Namespace, encoder, device : torch.device):
+        super(GeneratorModelEncoder, self).__init__()
+        self.modelid = "generator_baseline_shared"
+        self.args = args
+        self.device = device
+        self._encoder = encoder
+        self.lmconfig = self._encoder._bert.config
+        self.vocab_size = self.lmconfig.vocab_size
+        # Mlm Linear Layers
+        if self.args.factorized_embedding:
+            self._mlm_fc_1 = Linear(args.lm_hidden_size, args.lm_emb_size)
+            self._lnorm = LayerNorm(args, device, args.emb_size)
+            self._mlm_fc_2 = Linear(args.lm_emb_size, self.vocab_size)
+        else:
+            self._mlm_fc_1 = Linear(args.lm_hidden_size, args.lm_hidden_size)
+            self._lnorm = LayerNorm(args, device, args.lm_hidden_size)
+            self._mlm_fc_2 = Linear(args.lm_hidden_size, self.vocab_size)
+        # Activate Function
+        self._act = gelu
+
+    def forward(self, inputs : torch.Tensor, tgt_mlm : torch.Tensor, attention_mask : torch.Tensor = None) -> tuple:
+        # Encoded
+        encoded = self._encoder(inputs, attention_mask=attention_mask, encode="mlm")
+        # Extract Logits & Label
+        tgt_mlm = tgt_mlm.contiguous().view(-1)
+        output_mlm = encoded.contiguous().view(-1, self.vocab_size)
+        output_mlm = output_mlm[tgt_mlm > 0, :]
+        tgt_mlm = tgt_mlm[tgt_mlm > 0]
+        denominator = torch.tensor(output_mlm.size(0) + 1e-6).to(self.device)
+        return output_mlm, tgt_mlm, denominator
 
 class GeneratorModel(nn.Module):
     def __init__(self, args : Namespace, device : torch.device):
@@ -46,5 +77,5 @@ class GeneratorModel(nn.Module):
         output_mlm = output_mlm[tgt_mlm > 0, :]
         tgt_mlm = tgt_mlm[tgt_mlm > 0]
         #output_mlm = self._mlm_fc_2(output_mlm)
-        denominator = torch.tensor(output_mlm.size(0) + 1e-6).cuda()
+        denominator = torch.tensor(output_mlm.size(0) + 1e-6).to(self.device)
         return output_mlm, tgt_mlm, denominator

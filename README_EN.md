@@ -16,6 +16,10 @@
 # FCGEC: Fine-Grained Corpus for Chinese Grammatical Error Correction
 [**中文**](https://github.com/xlxwalex/FCGEC) | [**English**](https://github.com/xlxwalex/FCGEC/blob/main/README_EN.md)
 
+> **Note**
+> 
+> Regarding the issue raised in [ISSUE#19](https://github.com/xlxwalex/FCGEC/issues/19), this branch (shared) provides the training code for a shared encoder version of the Joint model.
+ 
 ## Introduction
 Chinese Grammatical Detection & Correction (CGED & CGEC) is a natural language processing sub-field. Given a sentence, the error detection and correction system can determine whether there are grammatical errors in the sentence. If there are grammatical errors in the sentence, the system needs to automatically correct the erroneous text and output the correct sentence.
 This technology has been used in various fields such as education and retrieval, .etc.
@@ -120,6 +124,8 @@ OUTPUT_PATH=                        # Prediction output of .xlsx file for STG mo
   </details>
 + (2023/04/25) Add a new script file [inference_singleline.py](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/inference_singleline.py) under minimized inference code for single sentence correction.
 + (2023/04/25) Fixed the bug where loss can be NaN in JointLoss and the problem with Generator module in Indep mode.
++ (2023/05/29) Modified the Joint model to a version with shared encoder in the [shared](https://github.com/xlxwalex/FCGEC/tree/shared/model) branch.
+
 
 ### Checkpoint File
 We provide checkpoint files of our STG trained on the FCGEC corpus to facilitate testing:
@@ -169,6 +175,7 @@ If you are using our code or data, please cite our paper:
 + YACLC Dataset：[YACLC](https://github.com/blcuicall/YACLC)
 + NLPCC18 Dataset：[NLPCC18](https://github.com/zhaoyyoo/NLPCC2018_GEC)
 + CTC2021 Competition：[CTC-2021](https://destwang.github.io/CTC2021-explorer/)
++ NaSGEC Dataset: [NaSGEC](https://github.com/HillZhang1999/NaSGEC)
 
 ## Terms and Conditions
 By downloading the data or by accessing it any manner, you agree not to redistribute the data. Our data can only used for non-commercial and academic-research purposes. The data must not be used for any unlawful or discriminatory purpose.

@@ -6,6 +6,31 @@ from argparse import Namespace
 from Model.Layer import Linear
 from Model.Layer import CRF
 
+class TaggerModelEncoder(nn.Module):
+    def __init__(self, args : Namespace, encoder, device : torch.device):
+        super(TaggerModelEncoder, self).__init__()
+        self.modelid = "tagger_baseline_shared"
+        self.args = args
+        self.device = device
+        self.max_token = args.max_generate + 1
+        # Encoder
+        self._encoder = encoder
+        # Solution A
+        # | - Dense
+        self._hidden2tag = Linear(args.lm_hidden_size, args.tagger_classes)
+        self._hidden2t = Linear(args.lm_hidden_size, self.max_token)
+        # | - Dropout
+        self._lm_dropout = nn.Dropout(args.dropout)
+
+    def forward(self, input : torch.Tensor, attention_mask : torch.Tensor = None):
+        # Encoder
+        encoded = self._encoder(input, attention_mask=attention_mask)
+        encoded = self._lm_dropout(encoded)
+        # Tagger
+        tagger_logits = self._hidden2tag(encoded)
+        # Generate Token
+        t_logits = self._hidden2t(encoded)
+        return tagger_logits, t_logits
 
 class TaggerModel(nn.Module):
     def __init__(self, args : Namespace, device : torch.device):

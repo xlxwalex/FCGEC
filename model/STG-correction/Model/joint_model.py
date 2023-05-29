@@ -2,8 +2,10 @@ import torch
 from torch import nn
 from argparse import Namespace
 from Model.Layer import Linear, LayerNorm, gelu, PointerNetwork
+from Model.plm import UnifiedEncoder
 from transformers import BertForMaskedLM, BertModel
 from Model import SwitchModel, TaggerModel, GeneratorModel
+from Model import SwitchModelEncoder, TaggerModelEncoder, GeneratorModelEncoder
 
 class LMEncoder(nn.Module):
     def __init__(self, lm_path : str, finetune : bool = True, output_hidden_states : bool = True, dropout : float = 0.1):
@@ -73,6 +75,23 @@ class ClassificationLayer(nn.Module):
         logit_ill, logit_cm, logit_cr, logit_um = self._fc_ill(pooler_output).unsqueeze(0), self._fc_cm(pooler_output).unsqueeze(0), self._fc_cr(pooler_output).unsqueeze(0), self._fc_um(pooler_output).unsqueeze(0)
         type_logits = torch.cat((logit_iwo, logit_ip, logit_sc, logit_ill, logit_cm, logit_cr, logit_um), dim=0)
         return bi_logits, type_logits
+
+class JointModelwithEncoder(nn.Module):
+    def __init__(self,args : Namespace, device : torch.device):
+        super(JointModelwithEncoder, self).__init__()
+        self.max_token  = args.max_generate + 1
+        self.encoder = UnifiedEncoder(args, device, use_encoder=True, pooler_output=False)
+        self.switch = SwitchModelEncoder(args, self.encoder, device)
+        self.tagger = TaggerModelEncoder(args, self.encoder, device)
+        self.generator = GeneratorModelEncoder(args, self.encoder, device)
+
+    def forward(self, inputs : tuple, tgt_mlm : torch.Tensor, attention_mask : torch.Tensor = None):
+        sw_inputs, tag_inputs, gen_inputs = inputs
+        sw_attnmask, tag_attnmask, generate_attnmask = attention_mask
+        switch_logits = self.switch(sw_inputs, sw_attnmask, need_mask=True)
+        tagger_logits = self.tagger(tag_inputs, tag_attnmask)
+        gen_logits = self.generator(gen_inputs, tgt_mlm, generate_attnmask)
+        return switch_logits, tagger_logits, gen_logits
 
 class JointModel(nn.Module):
     def __init__(self,args : Namespace, device : torch.device):

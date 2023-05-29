@@ -33,6 +33,9 @@ class JointTrainer(Trainer):
         self.gen_metric  = GeneratorMetric(args, mode='all')
         self.spec_metric = SwitchMetric_Spec(args, mode='all')
         self.eval_inform = {'eval_inform' : [], 'metric_info' : [], 'loss_info' : []}
+        self.tagger_weight = args.tagger_weight_post
+        self.switch_weight = args.switch_weight
+        self.switch_ref_weight = args.switch_ref_weight
 
     def collect_metric(self, swicths : tuple, tags : tuple, generates : tuple, desc : str = 'train'):
         ret = {'switch' : {}, 'tagger' : {}, 'generate' : {}}
@@ -51,7 +54,7 @@ class JointTrainer(Trainer):
         # Generate
         generate_met = self.gen_metric(gen_gts, gen_preds, gen_masks)
         ret['generate'] = generate_met
-        train_acc_refer = [ret['switch']['acc_sent'], ret['tagger']['sentence']['tagger'], ret['tagger']['sentence']['comb'], ret['generate']['token']]
+        train_acc_refer = [ret['switch']['acc_sent'] * self.switch_ref_weight, ret['tagger']['sentence']['tagger'], ret['tagger']['sentence']['comb'], ret['generate']['token']]
         # Process Desc for return
         if desc in ['train']:
             return sum(train_acc_refer) / len(train_acc_refer)
@@ -110,7 +113,7 @@ class JointTrainer(Trainer):
                 loss_switch = self.sw_loss_fn(poi_ret, swlabel_tensor, poi_mask)
                 loss_tagger = self.tag_loss_fn(tagger_logits, comb_logits, tagger_label, insmod_label)
                 loss_generator = self.gen_loss_fn(mlm_logits, mlm_tgts)
-                loss = loss_switch + 0.01* loss_tagger + loss_generator
+                loss = self.switch_weight * loss_switch + (self.tagger_weight if loss_tagger.item() < 1000 else 0.0005) * loss_tagger + loss_generator
                 loss.backward()
                 self.train_loss.append(loss.item())
                 self.optimizer.step()

@@ -1,7 +1,7 @@
 import os
 import warnings
 warnings.filterwarnings("ignore")
-from config import joint_parse, switch_parse, tagger_parse, generator_parse
+from config import joint_parse
 # Import torch
 from torch.utils.data import DataLoader
 import torch
@@ -13,7 +13,7 @@ from utils import get_device, set_seed, TAGGER_MAP
 # Import Trainer
 from Trainer import JointTrainer
 # Import Model
-from Model import JointModel
+from Model import JointModelwithEncoder
 from transformers import AdamW
 
 def train(args, check_dirname = ""):
@@ -47,7 +47,7 @@ def train(args, check_dirname = ""):
     # Device
     device = get_device(args.cuda, args.gpu_id)
     # Model
-    model = JointModel(args, device).to(device)
+    model = JointModelwithEncoder(args, device).to(device)
     no_decay = ['bias', 'LayerNorm.weight']
     optimizer_grouped_parameters = [
         {'params': [p for n, p in model.named_parameters() if not any(nd in n for nd in no_decay)],

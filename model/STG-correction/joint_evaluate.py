@@ -10,7 +10,7 @@ from DataProcessor import TaggerDataset as TaggerDataset, SwitchDataset, Generat
 # Import utils
 from utils.collate import collate_fn_base as collate_fn_base, collate_fn_tagger_V2 as collate_fn_tagger
 from utils import get_device, TAGGER_MAP, report_pipeline_output
-from Model import  JointModel
+from Model import  JointModelwithEncoder as JointModel
 from utils import padding, attention_mask, SwitchSearch, convert_spmap_tg, convert_spmap_sw
 from tqdm import tqdm
 from utils import reconstruct_tagger_V2 as reconstruct_tagger, fillin_tokens, convert_spmap2tokens

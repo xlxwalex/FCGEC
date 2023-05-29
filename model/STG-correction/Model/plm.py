@@ -3,6 +3,7 @@ from torch import nn
 from transformers import BertModel
 from Model.Layer import *
 import argparse
+from transformers import BertForMaskedLM
 
 class PLM(nn.Module):
     def __init__(self, args : argparse.Namespace, device : torch.device, use_encoder : bool = False, pooler_output : bool = True, all_output : bool = False):
@@ -40,4 +41,44 @@ class PLM(nn.Module):
             else:
                 output  = encoded
         return output
+
+class UnifiedEncoder(nn.Module):
+    def __init__(self, args : argparse.Namespace, device : torch.device, use_encoder : bool = False, pooler_output : bool = True, all_output : bool = False):
+        super(UnifiedEncoder, self).__init__()
+        self.args = args
+        self.device = device
+        self.use_encoder = use_encoder
+        self.pooler_output = pooler_output
+        self.all_output = all_output
+        self._bert = BertForMaskedLM.from_pretrained(args.lm_path, cache_dir='.cache/')
+        # Finetune Or Freeze
+        if args.finetune is not True:
+            for param in self._bert.base_model.parameters():
+                param.requires_grad = False
+        # Modify BertModel - output_hidden_states
+        self._bert_output = args.output_hidden_states
+        self._bert.config.output_hidden_states = self._bert_output
+        # Linear
+        self._pool = nn.Linear(args.lm_hidden_size, args.lm_hidden_size)
+        self._fc = Linear(args.lm_hidden_size, args.num_classes)
+
+    def forward(self, inputs : torch.Tensor, attention_mask : torch.Tensor = None, encode="hidden") -> tuple:
+        encode_output = self._bert(inputs, attention_mask=attention_mask)
+        if encode == "hidden":
+            # Pooler or Hidden
+            if self.pooler_output:
+                pooled_output = encode_output.hidden_states[-1][:, 0, :]
+                encoded = torch.tanh(self.output_layer_1(pooled_output))
+            else:
+                encoded = encode_output.hidden_states[-1]
+            # Whether to apply dense
+            if self.use_encoder is not True:
+                output  = self._fc(encoded)
+            else:
+                if self.all_output:
+                    output = (encode_output.pooler_output, encode_output.hidden_states[-1])
+                else:
+                    output  = encoded
+            return output
+        else: return self._bert(inputs, attention_mask=attention_mask).logits
 

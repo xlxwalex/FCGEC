@@ -4,6 +4,32 @@ from Model.plm import PLM
 from argparse import Namespace
 from Model.Layer import PointerNetwork, Linear
 
+class SwitchModelEncoder(nn.Module):
+    def __init__(self, args : Namespace, encoder, device : torch.device):
+        super(SwitchModelEncoder, self).__init__()
+        self.modelid = "switch_baseline_shared"
+        self.args = args
+        self.device = device
+        # Encoder
+        self._encoder = encoder
+        # Pointer Network
+        self._pointer = PointerNetwork(args, device)
+        # Dropout
+        self._lm_dropout = nn.Dropout(args.dropout)
+
+    def forward(self, input: torch.Tensor, attention_mask : torch.Tensor = None, need_mask : bool = False):
+        # Encoder
+        encoded = self._encoder(input, attention_mask = attention_mask)
+        encoded = self._lm_dropout(encoded)
+        # Pointer Network
+        pointer_ret = self._pointer(encoded, attention_mask, need_mask)
+        if need_mask:
+            pointer_logits, masks = pointer_ret
+            return pointer_logits, masks
+        else:
+            pointer_logits = pointer_ret
+            return pointer_logits
+
 class SwitchModel(nn.Module):
     def __init__(self, args : Namespace, device : torch.device):
         super(SwitchModel, self).__init__()

@@ -16,7 +16,12 @@
 # FCGEC: Fine-Grained Corpus for Chinese Grammatical Error Correction
 [**中文**](https://github.com/xlxwalex/FCGEC) | [**English**](https://github.com/xlxwalex/FCGEC/blob/main/README_EN.md)
 
-[[***程序更新*** (最近2023/04/25)]](#程序更新信息)&nbsp;&nbsp;&nbsp; [[***语料更新*** (最近2023/01/25)]](#语料更新信息)
+[[***程序更新*** (最近2023/05/29)]](#程序更新信息)&nbsp;&nbsp;&nbsp; [[***语料更新*** (最近2023/01/25)]](#语料更新信息)
+
+> **注意**
+> 
+> 针对[ISSUE#19](https://github.com/xlxwalex/FCGEC/issues/19)提出的问题，该分支(shared)提供了一个共享编码器版本的Joint模型的训练代码
+
 ## FCGEC介绍
 中文语法检错纠错（Chinese Grammatical Detection & Correction, CGED & CGEC）是指给定一个句子，检纠错系统可以检查句子中是否存在语法错误。如果有语法错误，系统需要对错误的文本进行自动纠错并输出正确的句子。
 该项技术已被用在教育、检索等多个领域。
@@ -117,6 +122,7 @@ OUTPUT_PATH=                        # 测试集预测输出.xlsx文件位置
   </details>
 + (2023/04/25) 根据`yuan-cherish`的建议([ISSUE#15](https://github.com/xlxwalex/FCGEC/issues/15))，我们新增了单句推理改错的脚本[inference_singleline.py](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/inference_singleline.py)，运行后直接输入错误句子，会返回修改后的句子(输入`q`退出)
 + (2023/04/25) 根据`Lj4040`的反馈([ISSUE#11](https://github.com/xlxwalex/FCGEC/issues/11))，我们修复了JointLoss中生成器可能损失为NaN的问题以及Indep模式下Generator过滤掉了有效样本的问题（可能会提升Indep模型的表现)
++ (2023/05/29) 根据`dabao12`提到的问题([ISSUE#11](https://github.com/xlxwalex/FCGEC/issues/19))，我们在[shared分支](https://github.com/xlxwalex/FCGEC/tree/shared/model)中将Joint模型修改为了共享编码器的版本
 
 ### 模型参数文件
 我们提供在FCGEC语料上训练好的模型checkpoint文件，以方便大家使用测试：
@@ -173,6 +179,7 @@ OUTPUT_PATH=                        # 测试集预测输出.xlsx文件位置
 + YACLC评测语料库：[YACLC](https://github.com/blcuicall/YACLC)
 + NLPCC18纠错数据集：[NLPCC18](https://github.com/zhaoyyoo/NLPCC2018_GEC)
 + CTC2021评测比赛：[CTC-2021](https://destwang.github.io/CTC2021-explorer/)
++ NaSGEC数据集：[NaSGEC](https://github.com/HillZhang1999/NaSGEC)
 
 ## 数据使用条件
 通过下载数据或以任何方式访问FCGEC数据，您同意仅将数据用于`非商业`和`学术研究`目的。除此之外，这些数据不得用于任何`非法`或`歧视性`的目的。
