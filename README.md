@@ -16,7 +16,7 @@
 # FCGEC: Fine-Grained Corpus for Chinese Grammatical Error Correction
 [**中文**](https://github.com/xlxwalex/FCGEC) | [**English**](https://github.com/xlxwalex/FCGEC/blob/main/README_EN.md)
 
-[[***程序更新*** (最近2023/04/25)]](#程序更新信息)&nbsp;&nbsp;&nbsp; [[***语料更新*** (最近2023/01/25)]](#语料更新信息)
+[[***程序更新*** (最近2023/04/25)]](#程序更新信息)&nbsp;&nbsp;&nbsp; [[***语料更新*** (最近2023/07/27)]](#语料更新信息)
 ## FCGEC介绍
 中文语法检错纠错（Chinese Grammatical Detection & Correction, CGED & CGEC）是指给定一个句子，检纠错系统可以检查句子中是否存在语法错误。如果有语法错误，系统需要对错误的文本进行自动纠错并输出正确的句子。
 该项技术已被用在教育、检索等多个领域。
@@ -39,8 +39,9 @@
 FCGEC的训练、验证及测试数据都已放在[`data`](https://github.com/xlxwalex/FCGEC/tree/main/data) 目录下，数据的格式请见 [`data`](https://github.com/xlxwalex/FCGEC/tree/main/data) 下的README文件。注意：测试集我们只给出了句子没有给出对应的标签，您可以通过该[Codalab评测页面](https://codalab.lisn.upsaclay.fr/competitions/8020) 提交您的模型预测结果来计算性能。
 
 ### 语料更新信息
-+ (2022/12/07 勘误) 感谢`nghuyong`的反馈([ISSUE#6](https://github.com/xlxwalex/FCGEC/issues/6)) ，`FCGEC_train.json`(1023)版本存在问题，该版本为中间过程语料被错误上传(有部分样本存在`error_flag`错误，以及缺少所有的正确句子样本)，目前该文件已重新上传
++ (2022/12/07 勘误) 感谢`nghuyong`的反馈([ISSUE#6](https://github.com/xlxwalex/FCGEC/issues/6))，`FCGEC_train.json`(1023)版本存在问题，该版本为中间过程语料被错误上传(有部分样本存在`error_flag`错误，以及缺少所有的正确句子样本)，目前该文件已重新上传
 + (2023/01/25 更新) 解决了`FCGEC_train.json`(1207)版本中特殊符号、空格可能引起程序报错的问题，并修复了部分Switch操作标签序列重复的问题
++ (2023/07/27 勘误) 感谢`KingiLuther`的反馈([ISSUE#22](https://github.com/xlxwalex/FCGEC/issues/22))，修复了训练集中两个样本错误类型标注有误的问题
 
 ## FCGEC任务
 我们的语料共有三种标签对应于纠检错的三个任务，分别如下：
