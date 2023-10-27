@@ -81,6 +81,9 @@ def train_valid_processor(out_path : str, dataset : dict, uuid : bool=True, out_
                         sentag[i][1] = 'D'
                 if 'Insert' in op.keys():
                     for i in op['Insert']:
+                        if i['pos'] == -1:
+                            sentag.append(['', 'IH', i['label']])
+                            continue
                         sentag[i['pos']][1] = i['tag']
                         sentag[i['pos']][-1] = i['label']
                 if 'Modify' in op.keys():
@@ -101,6 +104,8 @@ def train_valid_processor(out_path : str, dataset : dict, uuid : bool=True, out_
                 elif sentag[cou][1] == 'D':
                     cou += 1
                     continue
+                elif sentag[cou][1] == 'IH':
+                    sent = sentag[cou][-1] + sent
                 elif sentag[cou][1].startswith('INS'):
                     sent += sentag[cou][0]
                     sent += sentag[cou][-1]

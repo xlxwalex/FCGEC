@@ -120,6 +120,7 @@ OUTPUT_PATH=                        # Prediction output of .xlsx file for STG mo
   </details>
 + (2023/04/25) Add a new script file [inference_singleline.py](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/inference_singleline.py) under minimized inference code for single sentence correction.
 + (2023/04/25) Fixed the bug where loss can be NaN in JointLoss and the problem with Generator module in Indep mode.
++ (2023/10/27) Fixed the misalignment issue caused by sentence beginning insertion in [convert_fcgec_to_seq2seq.py](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/scripts/convert_fcgec_to_seq2seq.py).
 
 ### Checkpoint File
 We provide checkpoint files of our STG trained on the FCGEC corpus to facilitate testing:
