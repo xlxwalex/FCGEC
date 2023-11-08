@@ -24,9 +24,13 @@ Our corpus is stored in `JSON` format, where the format of [`FCGEC_train.json`](
 }
 ```
 
-***Note:*** Test set [`FCGEC_test.json`](https://github.com/xlxwalex/FCGEC/blob/main/data/FCGEC_test.json) do not have the attributes `error_flag`, `error_type` and `operation`.
+***Note:*** 
+1. Test set [`FCGEC_test.json`](https://github.com/xlxwalex/FCGEC/blob/main/data/FCGEC_test.json) do not have the attributes `error_flag`, `error_type` and `operation`.
+2. Due to the presence of homologous sentences among the training, validation, and test sets, which may lead to data contamination, we have provided the `FCGEC_train_filtered.json` file, which excludes sentences in the training set that overlap with those in the validation and test sets.
 
-***注意：*** 测试集没有给出`error_flag`， `error_type` 以及 `operation`三个属性。
+***注意：*** 
+1. 测试集没有给出`error_flag`， `error_type` 以及 `operation`三个属性。
+2. 由于训练集、验证集和测试集之间存在同源句子，会导致数据污染。因此我们提供了`FCGEC_train_filtered.json`文件，该文件排除了训练集中与验证集和测试集重叠的句子。
 
 ## Operation Format
 
