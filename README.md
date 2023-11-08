@@ -16,7 +16,7 @@
 # FCGEC: Fine-Grained Corpus for Chinese Grammatical Error Correction
 [**中文**](https://github.com/xlxwalex/FCGEC) | [**English**](https://github.com/xlxwalex/FCGEC/blob/main/README_EN.md)
 
-[[***程序更新*** (最近2023/10/27)]](#程序更新信息)&nbsp;&nbsp;&nbsp; [[***语料更新*** (最近2023/07/27)]](#语料更新信息)
+[[***程序更新*** (最近2023/10/27)]](#程序更新信息)&nbsp;&nbsp;&nbsp; [[***语料更新*** (最近2023/11/08)]](#语料更新信息)
 ## FCGEC介绍
 中文语法检错纠错（Chinese Grammatical Detection & Correction, CGED & CGEC）是指给定一个句子，检纠错系统可以检查句子中是否存在语法错误。如果有语法错误，系统需要对错误的文本进行自动纠错并输出正确的句子。
 该项技术已被用在教育、检索等多个领域。
@@ -42,6 +42,7 @@ FCGEC的训练、验证及测试数据都已放在[`data`](https://github.com/xl
 + (2022/12/07 勘误) 感谢`nghuyong`的反馈([ISSUE#6](https://github.com/xlxwalex/FCGEC/issues/6))，`FCGEC_train.json`(1023)版本存在问题，该版本为中间过程语料被错误上传(有部分样本存在`error_flag`错误，以及缺少所有的正确句子样本)，目前该文件已重新上传
 + (2023/01/25 更新) 解决了`FCGEC_train.json`(1207)版本中特殊符号、空格可能引起程序报错的问题，并修复了部分Switch操作标签序列重复的问题
 + (2023/07/27 勘误) 感谢`KingiLuther`的反馈([ISSUE#22](https://github.com/xlxwalex/FCGEC/issues/22))，修复了训练集中两个样本错误类型标注有误的问题
++ (2023/11/08 更新) 感谢`JamyDon`的反馈([ISSUE#26](https://github.com/xlxwalex/FCGEC/issues/26))，之前版本的训练集、验证集以及测试集之间存在同源句子，会造成数据泄露问题。我们提供了一个新的[`FCGEC_train_filtered.json`](https://github.com/xlxwalex/FCGEC/tree/main/data/FCGEC_train_filtered.json)文件，过滤掉了训练集中与验证、测试集中同源的句子
 
 ## FCGEC任务
 我们的语料共有三种标签对应于纠检错的三个任务，分别如下：
@@ -103,10 +104,10 @@ OUTPUT_PATH=                        # 测试集预测输出.xlsx文件位置
 ```
 
 ### 程序更新信息
-+ (2022/11/29) 根据`GMago123`的反馈([ISSUE#3](https://github.com/xlxwalex/FCGEC/issues/3)) ，为了便于提交评测，我们在Joint的输出XLSX文件中加入了对应的UID字段
-+ (2022/12/06) 根据`谭*环`(邮件)的建议，为了方便对比Seq2Seq类型的模型，我们提供了可将FCGEC数据的编辑操作转换为序列到序列数据的脚本[convert_fcgec_to_seq2seq.py](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/scripts/convert_fcgec_to_seq2seq.py) ，使用方式请见[`scripts`](https://github.com/xlxwalex/FCGEC/tree/main/model/STG-correction/scripts) 下的README文件 
-+ (2023/01/25) 根据`Candice52`的反馈([ISSUE#7](https://github.com/xlxwalex/FCGEC/issues/7))，我们提供了将其他Seq2Seq格式的数据转换为本工作中的操作格式的脚本(论文中的Algorithm 1代码) [convert_seq2seq_to_operation.py](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/scripts/convert_seq2seq_to_operation.py) ，使用方式请见[`scripts`](https://github.com/xlxwalex/FCGEC/tree/main/model/STG-correction/scripts) 下的README文件 
-+ (2023/03/03) 根据`Helenailse1`的建议([ISSUE#10](https://github.com/xlxwalex/FCGEC/issues/10))，我们新增了对标点、字母等非中文符号的映射
++ (2022/11/29) 感谢`GMago123`的反馈([ISSUE#3](https://github.com/xlxwalex/FCGEC/issues/3)) ，为了便于提交评测，我们在Joint的输出XLSX文件中加入了对应的UID字段
++ (2022/12/06) 感谢`谭*环`(邮件)的建议，为了方便对比Seq2Seq类型的模型，我们提供了可将FCGEC数据的编辑操作转换为序列到序列数据的脚本[convert_fcgec_to_seq2seq.py](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/scripts/convert_fcgec_to_seq2seq.py) ，使用方式请见[`scripts`](https://github.com/xlxwalex/FCGEC/tree/main/model/STG-correction/scripts) 下的README文件 
++ (2023/01/25) 感谢`Candice52`的反馈([ISSUE#7](https://github.com/xlxwalex/FCGEC/issues/7))，我们提供了将其他Seq2Seq格式的数据转换为本工作中的操作格式的脚本(论文中的Algorithm 1代码) [convert_seq2seq_to_operation.py](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/scripts/convert_seq2seq_to_operation.py) ，使用方式请见[`scripts`](https://github.com/xlxwalex/FCGEC/tree/main/model/STG-correction/scripts) 下的README文件 
++ (2023/03/03) 感谢Helenailse1`的建议([ISSUE#10](https://github.com/xlxwalex/FCGEC/issues/10))，我们新增了对标点、字母等非中文符号的映射
 + (2023/04/24) 增加新特性`Reporter`，程序可以导出病句报告，详细信息请见[`app`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/app)下的README文件以及[ISSUE#15](https://github.com/xlxwalex/FCGEC/issues/15)，DEMO使用代码见[`demo_pipeline.py`](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/demo_pipeline.py)，[DEMO报告](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/dataset/demo/demo-v1.0.pdf)截图如下所示：
   <details>
   <summary>展开查看截图</summary>
@@ -116,9 +117,9 @@ OUTPUT_PATH=                        # 测试集预测输出.xlsx文件位置
     <br>
   </p>
   </details>
-+ (2023/04/25) 根据`yuan-cherish`的建议([ISSUE#15](https://github.com/xlxwalex/FCGEC/issues/15))，我们新增了单句推理改错的脚本[inference_singleline.py](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/inference_singleline.py)，运行后直接输入错误句子，会返回修改后的句子(输入`q`退出)
-+ (2023/04/25) 根据`Lj4040`的反馈([ISSUE#11](https://github.com/xlxwalex/FCGEC/issues/11))，我们修复了JointLoss中生成器可能损失为NaN的问题以及Indep模式下Generator过滤掉了有效样本的问题（可能会提升Indep模型的表现)
-+ (2023/10/27) 根据`yanghh2000`的反馈([ISSUE#24](https://github.com/xlxwalex/FCGEC/issues/24)，我们修复了[convert_fcgec_to_seq2seq.py](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/scripts/convert_fcgec_to_seq2seq.py)插入句首引起的错位问题)
++ (2023/04/25) 感谢`yuan-cherish`的建议([ISSUE#15](https://github.com/xlxwalex/FCGEC/issues/15))，我们新增了单句推理改错的脚本[inference_singleline.py](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/inference_singleline.py)，运行后直接输入错误句子，会返回修改后的句子(输入`q`退出)
++ (2023/04/25) 感谢`Lj4040`的反馈([ISSUE#11](https://github.com/xlxwalex/FCGEC/issues/11))，我们修复了JointLoss中生成器可能损失为NaN的问题以及Indep模式下Generator过滤掉了有效样本的问题（可能会提升Indep模型的表现)
++ (2023/10/27) 感谢`yanghh2000`的反馈([ISSUE#24](https://github.com/xlxwalex/FCGEC/issues/24))，我们修复了[convert_fcgec_to_seq2seq.py](https://github.com/xlxwalex/FCGEC/blob/main/model/STG-correction/scripts/convert_fcgec_to_seq2seq.py)插入句首引起的错位问题)
 
 ### 模型参数文件
 我们提供在FCGEC语料上训练好的模型checkpoint文件，以方便大家使用测试：
