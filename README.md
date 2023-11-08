@@ -42,7 +42,7 @@ FCGEC的训练、验证及测试数据都已放在[`data`](https://github.com/xl
 + (2022/12/07 勘误) 感谢`nghuyong`的反馈([ISSUE#6](https://github.com/xlxwalex/FCGEC/issues/6))，`FCGEC_train.json`(1023)版本存在问题，该版本为中间过程语料被错误上传(有部分样本存在`error_flag`错误，以及缺少所有的正确句子样本)，目前该文件已重新上传
 + (2023/01/25 更新) 解决了`FCGEC_train.json`(1207)版本中特殊符号、空格可能引起程序报错的问题，并修复了部分Switch操作标签序列重复的问题
 + (2023/07/27 勘误) 感谢`KingiLuther`的反馈([ISSUE#22](https://github.com/xlxwalex/FCGEC/issues/22))，修复了训练集中两个样本错误类型标注有误的问题
-+ (2023/11/08 更新) 感谢`JamyDon`的反馈([ISSUE#26](https://github.com/xlxwalex/FCGEC/issues/26))，之前版本的训练集、验证集以及测试集之间存在同源句子，会造成数据泄露问题。我们提供了一个新的[`FCGEC_train_filtered.json`](https://github.com/xlxwalex/FCGEC/tree/main/data/FCGEC_train_filtered.json)文件，过滤掉了训练集中与验证、测试集中同源的句子
++ (2023/11/08 更新) 感谢`JamyDon`的反馈([ISSUE#26](https://github.com/xlxwalex/FCGEC/issues/26))，之前版本的训练集、验证以及测试集之间存在同源句子。我们提供了一个新的[`FCGEC_train_filtered.json`](https://github.com/xlxwalex/FCGEC/tree/main/data/FCGEC_train_filtered.json)文件，过滤掉了训练集中与验证、测试集同源的句子
 
 ## FCGEC任务
 我们的语料共有三种标签对应于纠检错的三个任务，分别如下：
