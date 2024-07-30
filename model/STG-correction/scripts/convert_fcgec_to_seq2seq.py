@@ -6,7 +6,7 @@ import pandas as pd
 import argparse
 from tqdm import tqdm
 import numpy as np
-from utils.argument import ArgumentGroup
+from ..utils.argument import ArgumentGroup
 from copy import deepcopy
 
 def args_parse():

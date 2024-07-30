@@ -619,7 +619,7 @@
         "sentence": "伴随着末代港督的离去，这座古典风格的白色建筑在历经一个多世纪的风雨后，新的旗帜将飘扬在香港上空。",
         "error_flag": 1,
         "error_type": "SC",
-        "operation": "[{\"Insert\":[{\"pos\":-1,\"tag\":\"INS_7\",\"label\":\"将迎来新的旗帜\"}]}]",
+        "operation": "[{\"Delete\":[35,36,37,38,39,40,41,42,43,44,45,46]},{\"Insert\":[{\"pos\":34,\"tag\":\"INS_7\",\"label\":\"将迎来新的旗帜\"}]}]",
         "version": "FCGEC EMNLP 2022"
     },
     "a8d70942635c35bad559a1c7082d4ea9": {
