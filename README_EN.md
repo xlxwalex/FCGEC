@@ -174,6 +174,6 @@ If you are using our code or data, please cite our paper:
 ## Terms and Conditions
 By downloading the data or by accessing it any manner, you agree not to redistribute the data. Our data can only used for non-commercial and academic-research purposes. The data must not be used for any unlawful or discriminatory purpose.
 
-## Hwo to Contact Us
+## How to Contact Us
 1. If you have any questions about the data / code, feel free to submit an Issue or contact [`xlxw@zju.edu.cn`](mailto:xlxw@zju.edu.cn)
 2. If you have any questions about the evaluation page, you can contact [`pengjw@zju.edu.cn`](mailto:pengjw@zju.edu.cn). (***Recommend*** : send a copy to [`xlxw@zju.edu.cn`](mailto:xlxw@zju.edu.cn))
