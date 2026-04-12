@@ -17,6 +17,12 @@
 [**中文**](https://github.com/xlxwalex/FCGEC) | [**English**](https://github.com/xlxwalex/FCGEC/blob/main/README_EN.md)
 
 [[***程序更新*** (最近2023/10/27)]](#程序更新信息)&nbsp;&nbsp;&nbsp; [[***语料更新*** (最近2023/11/08)]](#语料更新信息)
+
+> **评测平台更新（2026/04/12）**
+> 
+> 因Codalab平台已于2025年12月31日停止接收新评测任务提交，FCGEC已同步迁移至CodaBench平台。当前官方评测地址：[Public Leaderboard for FCGEC Corpus](https://www.codabench.org/competitions/15596/),欢迎参与评测！
+
+
 ## FCGEC介绍
 中文语法检错纠错（Chinese Grammatical Detection & Correction, CGED & CGEC）是指给定一个句子，检纠错系统可以检查句子中是否存在语法错误。如果有语法错误，系统需要对错误的文本进行自动纠错并输出正确的句子。
 该项技术已被用在教育、检索等多个领域。
