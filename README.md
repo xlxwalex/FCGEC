@@ -156,7 +156,7 @@ OUTPUT_PATH=                        # 测试集预测输出.xlsx文件位置
 **2026/04/12更新：**
 Codalab评测网站在2025年12月31日后已不再接受新的评测任务提交，因此FCGEC已迁移至CodaBench。大家可通过此链接进行评测：
 <p align="center">
-    <a href="https://codalab.lisn.upsaclay.fr/competitions/8020">
+    <a href="https://www.codabench.org/competitions/15596">
         <img alt="Codabench" src="https://img.shields.io/badge/ FCGEC- CodaBench-plastic?style=for-the-badge&logoColor=white&link=https://www.codabench.org/competitions/15596&logo=codalab">
     </a>
 </p>
